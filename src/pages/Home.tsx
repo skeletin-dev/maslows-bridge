@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import { SITE } from "../site"
+import { Link } from "react-router-dom";
+import { SITE } from "../site";
 
 export function Home() {
   return (
@@ -23,8 +23,9 @@ export function Home() {
               {SITE.tagline}
             </h1>
             <p className="max-w-xl text-base leading-relaxed text-mb-text-muted sm:text-lg">
-              Maslow&apos;s Bridge Indy is dedicated to supporting neighbors experiencing homelessness with job
-              training, everyday resources, and community care—helping people move toward stability and
+              Maslow&apos;s Bridge is dedicated to supporting neighbors
+              experiencing homelessness with job training, everyday resources,
+              and community care—helping people move toward stability and
               reintegration with dignity.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -42,19 +43,6 @@ export function Home() {
               </Link>
             </div>
           </div>
-
-          <div className="flex flex-1 justify-center sm:justify-end">
-            <div className="relative w-full max-w-sm">
-              <div className="absolute inset-2 rounded-[2rem] bg-mb-accent/20 blur-xl" aria-hidden />
-              <img
-                src={SITE.logoSrc}
-                alt="Maslow's Bridge"
-                width={428}
-                height={384}
-                className="relative w-full rounded-[2.25rem] object-cover shadow-2xl ring-1 ring-white/10"
-              />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -62,21 +50,29 @@ export function Home() {
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-3 lg:gap-8">
           <article className="rounded-2xl border border-mb-mist bg-white p-6 shadow-sm">
             <div className="mb-4 h-1 w-12 rounded-full bg-mb-hope" />
-            <h2 className="font-display text-xl font-bold text-mb-ink">Job training</h2>
+            <h2 className="font-display text-xl font-bold text-mb-ink">
+              Job training
+            </h2>
             <p className="mt-2 text-mb-ink/85">
-              Practical skills and support that open doors to employment and self-sufficiency.
+              Practical skills and support that open doors to employment and
+              self-sufficiency.
             </p>
           </article>
           <article className="rounded-2xl border border-mb-mist bg-white p-6 shadow-sm">
             <div className="mb-4 h-1 w-12 rounded-full bg-mb-hope" />
-            <h2 className="font-display text-xl font-bold text-mb-ink">Everyday resources</h2>
+            <h2 className="font-display text-xl font-bold text-mb-ink">
+              Everyday resources
+            </h2>
             <p className="mt-2 text-mb-ink/85">
-              Essentials that meet people where they are—food, clothing, hygiene, and more.
+              Essentials that meet people where they are—food, clothing,
+              hygiene, and more.
             </p>
           </article>
           <article className="rounded-2xl border border-mb-mist bg-white p-6 shadow-sm">
             <div className="mb-4 h-1 w-12 rounded-full bg-mb-hope" />
-            <h2 className="font-display text-xl font-bold text-mb-ink">Community</h2>
+            <h2 className="font-display text-xl font-bold text-mb-ink">
+              Community
+            </h2>
             <p className="mt-2 text-mb-ink/85">
               Relationships and advocacy that remind every neighbor they belong.
             </p>
@@ -87,9 +83,12 @@ export function Home() {
       <section className="bg-mb-surface-elevated px-4 py-14 text-mb-text-on-dark sm:py-16">
         <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="font-display text-2xl font-bold sm:text-3xl">Join the work</h2>
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">
+              Join the work
+            </h2>
             <p className="mt-2 max-w-xl text-mb-text-muted">
-              Volunteer, partner, or reach out—together we can widen the bridge home.
+              Volunteer, partner, or reach out—together we can widen the bridge
+              home.
             </p>
           </div>
           <Link
@@ -101,5 +100,5 @@ export function Home() {
         </div>
       </section>
     </>
-  )
+  );
 }
