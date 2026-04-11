@@ -1,0 +1,372 @@
+{
+  "version": "2.10",
+  "variables": {
+    "color.surface": {
+      "type": "color",
+      "value": "#141D2E",
+      "name": "Deep navy (header/footer/bg)"
+    },
+    "color.surface.elevated": {
+      "type": "color",
+      "value": "#273859",
+      "name": "Slate blue contrast panels"
+    },
+    "color.accent": {
+      "type": "color",
+      "value": "#C79E47",
+      "name": "Nav + links gold"
+    },
+    "color.accent.solid": {
+      "type": "color",
+      "value": "#A87D2C",
+      "name": "CTA / emphasis gold"
+    },
+    "color.cream": {
+      "type": "color",
+      "value": "#F7F4EC",
+      "name": "Warm light section bg"
+    },
+    "color.mist": {
+      "type": "color",
+      "value": "#E4E9F2",
+      "name": "Cool neutral for cards"
+    },
+    "color.hope": {
+      "type": "color",
+      "value": "#5B8A78",
+      "name": "Secondary accent (growth / stability)"
+    },
+    "radius.button": {
+      "type": "number",
+      "value": 28
+    },
+    "space.section": {
+      "type": "number",
+      "value": 24
+    }
+  },
+  "children": [
+    {
+      "id": "artboard-mobile-home",
+      "name": "Home — Mobile 390×844",
+      "type": "frame",
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844,
+      "fill": "$color.surface",
+      "layout": "vertical",
+      "clip": true,
+      "children": [
+        {
+          "id": "mb-header",
+          "type": "frame",
+          "width": "fill_container",
+          "height": 72,
+          "fill": "$color.surface",
+          "layout": "horizontal",
+          "padding": [16, 20],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "mb-logo-mark",
+              "type": "rectangle",
+              "width": 44,
+              "height": 44,
+              "cornerRadius": 10,
+              "fill": "$color.surface.elevated"
+            },
+            {
+              "id": "mb-nav-trigger",
+              "type": "text",
+              "content": "Menu",
+              "fontFamily": "Open Sans",
+              "fontSize": 15,
+              "fontWeight": "600",
+              "fill": "$color.accent",
+              "textGrowth": "auto"
+            }
+          ]
+        },
+        {
+          "id": "mb-hero",
+          "type": "frame",
+          "width": "fill_container",
+          "height": 320,
+          "fill": "$color.surface.elevated",
+          "layout": "vertical",
+          "padding": [24, 20],
+          "gap": 16,
+          "justifyContent": "end",
+          "children": [
+            {
+              "id": "mb-hero-kicker",
+              "type": "text",
+              "content": "Maslow's Bridge · Indianapolis",
+              "fontFamily": "Open Sans",
+              "fontSize": 13,
+              "fontWeight": "600",
+              "fill": "$color.accent",
+              "letterSpacing": 0.4,
+              "textGrowth": "auto"
+            },
+            {
+              "id": "mb-hero-title",
+              "type": "text",
+              "content": "Empowering the homeless community",
+              "fontFamily": "Open Sans",
+              "fontSize": 28,
+              "fontWeight": "700",
+              "fill": "#F0EBE0",
+              "lineHeight": 1.2,
+              "textGrowth": "fixed-width",
+              "width": 350
+            },
+            {
+              "id": "mb-hero-cta",
+              "type": "frame",
+              "width": "fit_content",
+              "height": 52,
+              "fill": "$color.accent.solid",
+              "cornerRadius": "$radius.button",
+              "layout": "horizontal",
+              "padding": [20, 28],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "mb-hero-cta-label",
+                  "type": "text",
+                  "content": "Get involved",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 16,
+                  "fontWeight": "600",
+                  "fill": "$color.surface",
+                  "textGrowth": "auto"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mb-intro",
+          "type": "frame",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$color.cream",
+          "layout": "vertical",
+          "padding": "$space.section",
+          "gap": 12,
+          "children": [
+            {
+              "id": "mb-intro-copy",
+              "type": "text",
+              "content": "Job training, everyday resources, and community support to help neighbors reintegrate with dignity.",
+              "fontFamily": "Open Sans",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "fill": "#2A3144",
+              "lineHeight": 1.5,
+              "textGrowth": "fixed-width",
+              "width": 342
+            },
+            {
+              "id": "mb-accent-line",
+              "type": "rectangle",
+              "width": 48,
+              "height": 4,
+              "cornerRadius": 2,
+              "fill": "$color.hope"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "artboard-desktop-home",
+      "name": "Home — Desktop 1440×900",
+      "type": "frame",
+      "x": 430,
+      "y": 0,
+      "width": 1440,
+      "height": 900,
+      "fill": "$color.cream",
+      "layout": "vertical",
+      "clip": true,
+      "children": [
+        {
+          "id": "dk-header",
+          "type": "frame",
+          "width": "fill_container",
+          "height": 96,
+          "fill": "$color.surface",
+          "layout": "horizontal",
+          "padding": [24, 48],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "dk-brand",
+              "type": "frame",
+              "layout": "horizontal",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "dk-logo",
+                  "type": "rectangle",
+                  "width": 56,
+                  "height": 56,
+                  "cornerRadius": 12,
+                  "fill": "$color.surface.elevated"
+                },
+                {
+                  "id": "dk-site-title",
+                  "type": "text",
+                  "content": "Maslow's Bridge",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 22,
+                  "fontWeight": "700",
+                  "fill": "#F0EBE0",
+                  "textGrowth": "auto"
+                }
+              ]
+            },
+            {
+              "id": "dk-nav-row",
+              "type": "frame",
+              "layout": "horizontal",
+              "gap": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "dk-nav-home",
+                  "type": "text",
+                  "content": "Home",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 15,
+                  "fontWeight": "600",
+                  "fill": "$color.accent",
+                  "textGrowth": "auto"
+                },
+                {
+                  "id": "dk-nav-services",
+                  "type": "text",
+                  "content": "Services",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 15,
+                  "fill": "#C9D0E0",
+                  "textGrowth": "auto"
+                },
+                {
+                  "id": "dk-nav-about",
+                  "type": "text",
+                  "content": "About",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 15,
+                  "fill": "#C9D0E0",
+                  "textGrowth": "auto"
+                },
+                {
+                  "id": "dk-nav-contact",
+                  "type": "text",
+                  "content": "Contact",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 15,
+                  "fill": "#C9D0E0",
+                  "textGrowth": "auto"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dk-hero-band",
+          "type": "frame",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "rotation": 135,
+            "colors": [
+              { "position": 0, "color": "#1a2438" },
+              { "position": 1, "color": "#273859" }
+            ]
+          },
+          "layout": "horizontal",
+          "padding": [64, 80],
+          "gap": 48,
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "dk-hero-copy-col",
+              "type": "frame",
+              "layout": "vertical",
+              "gap": 20,
+              "width": 560,
+              "children": [
+                {
+                  "id": "dk-hero-h1",
+                  "type": "text",
+                  "content": "Empowering the homeless community",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 52,
+                  "fontWeight": "700",
+                  "fill": "#F7F4EC",
+                  "lineHeight": 1.15,
+                  "textGrowth": "fixed-width",
+                  "width": 520
+                },
+                {
+                  "id": "dk-hero-sub",
+                  "type": "text",
+                  "content": "Essential job training and everyday resources for neighbors working toward stability and independence.",
+                  "fontFamily": "Open Sans",
+                  "fontSize": 18,
+                  "fill": "#B8C4D9",
+                  "lineHeight": 1.55,
+                  "textGrowth": "fixed-width",
+                  "width": 480
+                },
+                {
+                  "id": "dk-hero-cta",
+                  "type": "frame",
+                  "width": "fit_content",
+                  "height": 56,
+                  "fill": "$color.accent.solid",
+                  "cornerRadius": "$radius.button",
+                  "layout": "horizontal",
+                  "padding": [18, 40],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "id": "dk-hero-cta-t",
+                      "type": "text",
+                      "content": "Get involved",
+                      "fontFamily": "Open Sans",
+                      "fontSize": 17,
+                      "fontWeight": "600",
+                      "fill": "$color.surface",
+                      "textGrowth": "auto"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "dk-hero-visual",
+              "type": "rectangle",
+              "width": 420,
+              "height": 380,
+              "cornerRadius": 36,
+              "fill": "$color.surface.elevated"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

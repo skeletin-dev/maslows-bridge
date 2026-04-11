@@ -1,0 +1,22 @@
+/* Design tokens — mirror design/maslows-bridge-home.pen variables + Tailwind theme */
+@theme {
+  /* Brand (from maslowsbridge.org) */
+  --color-mb-surface: #141d2e;
+  --color-mb-surface-elevated: #273859;
+  --color-mb-accent: #c79e47;
+  --color-mb-accent-solid: #a87d2c;
+  --color-mb-accent-hover: #8f6f26;
+
+  /* Extended palette */
+  --color-mb-cream: #f7f4ec;
+  --color-mb-mist: #e4e9f2;
+  --color-mb-hope: #5b8a78;
+  --color-mb-ink: #2a3144;
+  --color-mb-text-on-dark: #f0ebe0;
+  --color-mb-text-muted: #b8c4d9;
+
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Merriweather", ui-serif, Georgia, serif;
+
+  --radius-pill: 9999px;
+}
