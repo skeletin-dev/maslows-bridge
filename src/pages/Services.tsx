@@ -80,7 +80,7 @@ function IconJobs() {
 
 const services: ServiceDetail[] = [
   {
-    title: "Workshop to enrich individuals' lives",
+    title: "Workshops to enrich individuals' lives",
     summary: "Skills, confidence, and community in a supportive setting.",
     body: "Our enrichment workshops create space to learn, reflect, and grow—with practical tools for daily life and room to build relationships with staff and peers. Sessions are designed to meet people where they are, with respect and encouragement at the center.",
     highlights: [
