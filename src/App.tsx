@@ -1,14 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { Layout } from "./components/Layout"
-import { About } from "./pages/About"
-import { Contact } from "./pages/Contact"
-import { History } from "./pages/History"
-import { Home } from "./pages/Home"
-import { LoveInAction } from "./pages/LoveInAction"
-import { NotFound } from "./pages/NotFound"
-import { Projects } from "./pages/Projects"
-import { Services } from "./pages/Services"
-import { WinterWarmth } from "./pages/WinterWarmth"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import { About } from "./pages/About";
+import { Contact } from "./pages/Contact";
+import { History } from "./pages/History";
+import { Home } from "./pages/Home";
+import { NotFound } from "./pages/NotFound";
+import { Services } from "./pages/Services";
+import { Team } from "./pages/Team";
 
 export default function App() {
   return (
@@ -19,13 +17,11 @@ export default function App() {
           <Route path="services" element={<Services />} />
           <Route path="about" element={<About />} />
           <Route path="history" element={<History />} />
-          <Route path="projects" element={<Projects />} />
-          <Route path="projects/winter-warmth-drive" element={<WinterWarmth />} />
-          <Route path="projects/love-in-action" element={<LoveInAction />} />
+          <Route path="team" element={<Team />} />
           <Route path="contact-us" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }

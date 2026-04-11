@@ -13,9 +13,33 @@
     background-color: var(--color-mb-cream);
     color: var(--color-mb-ink);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  .font-display {
+    font-feature-settings: "kern" 1, "liga" 1;
+    letter-spacing: -0.01em;
   }
 
   #root {
     min-height: 100dvh;
+  }
+
+  * {
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Promote route / overlay motion to its own layer for smoother compositing on mobile GPUs */
+  [data-motion-page],
+  [data-motion-pop] {
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 }

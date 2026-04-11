@@ -1,6 +1,8 @@
-import { useState } from "react"
-import { NavLink, Link, useLocation } from "react-router-dom"
-import { SITE } from "../site"
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useSiteMotion } from "../hooks/useSiteMotion";
+import { SITE } from "../site";
 
 const navClass = ({ isActive }: { isActive: boolean }) =>
   [
@@ -8,18 +10,22 @@ const navClass = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? "text-mb-accent"
       : "text-mb-text-on-dark/90 hover:text-mb-accent",
-  ].join(" ")
+  ].join(" ");
 
-const subNavClass = ({ isActive }: { isActive: boolean }) =>
-  [
-    "block rounded-md py-2 pl-3 pr-3 text-sm sm:py-1.5",
-    isActive ? "text-mb-accent" : "text-mb-text-muted hover:text-mb-accent",
-  ].join(" ")
+const mobileLinks: { to: string; end?: boolean; label: string }[] = [
+  { to: "/", end: true, label: "Home" },
+  { to: "/services", label: "Services" },
+  { to: "/about", label: "About" },
+  { to: "/history", label: "History" },
+  { to: "/team", label: "Team" },
+  { to: "/contact-us", label: "Contact" },
+]
+
+const easeOut = [0.22, 1, 0.36, 1] as const
 
 export function Header() {
-  const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
-  const projectsActive = pathname.startsWith("/projects")
+  const [open, setOpen] = useState(false);
+  const m = useSiteMotion();
 
   return (
     <header className="sticky top-0 z-50 border-b border-mb-surface-elevated/80 bg-mb-surface shadow-sm">
@@ -41,7 +47,10 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden lg:flex lg:items-center lg:gap-1" aria-label="Main">
+        <nav
+          className="hidden lg:flex lg:items-center lg:gap-1"
+          aria-label="Main"
+        >
           <NavLink to="/" className={navClass} end>
             Home
           </NavLink>
@@ -54,29 +63,9 @@ export function Header() {
           <NavLink to="/history" className={navClass}>
             History
           </NavLink>
-          <div className="group relative">
-            <NavLink
-              to="/projects"
-              className={({ isActive }) =>
-                `${navClass({ isActive: isActive || projectsActive })} inline-flex items-center gap-1`
-              }
-            >
-              Projects
-              <span className="text-xs opacity-70" aria-hidden>
-                ▾
-              </span>
-            </NavLink>
-            <div className="invisible absolute left-0 top-full z-50 min-w-[14rem] pt-1 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-              <div className="rounded-lg border border-mb-surface-elevated bg-mb-surface py-1 shadow-lg">
-                <NavLink to="/projects/winter-warmth-drive" className={subNavClass}>
-                  Winter Warmth Drive
-                </NavLink>
-                <NavLink to="/projects/love-in-action" className={subNavClass}>
-                  Love In Action
-                </NavLink>
-              </div>
-            </div>
-          </div>
+          <NavLink to="/team" className={navClass}>
+            Team
+          </NavLink>
           <NavLink to="/contact-us" className={navClass}>
             Contact
           </NavLink>
@@ -91,57 +80,112 @@ export function Header() {
           onClick={() => setOpen((v) => !v)}
         >
           {open ? (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
-            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
       </div>
 
-      <div
-        id="mobile-menu"
-        className={[
-          "border-t border-mb-surface-elevated bg-mb-surface lg:hidden",
-          open ? "block" : "hidden",
-        ].join(" ")}
-      >
-        <nav className="mx-auto flex max-w-6xl flex-col px-4 py-4" aria-label="Mobile">
-          <NavLink to="/" className={navClass} end onClick={() => setOpen(false)}>
-            Home
-          </NavLink>
-          <NavLink to="/services" className={navClass} onClick={() => setOpen(false)}>
-            Services
-          </NavLink>
-          <NavLink to="/about" className={navClass} onClick={() => setOpen(false)}>
-            About
-          </NavLink>
-          <NavLink to="/history" className={navClass} onClick={() => setOpen(false)}>
-            History
-          </NavLink>
-          <NavLink to="/projects" className={navClass} onClick={() => setOpen(false)}>
-            Projects
-          </NavLink>
-          <div className="ml-3 flex flex-col border-l border-mb-surface-elevated pl-3">
-            <NavLink
-              to="/projects/winter-warmth-drive"
-              className={subNavClass}
-              onClick={() => setOpen(false)}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            id="mobile-menu"
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={
+              m.isReduced
+                ? { duration: 0.2, ease: m.ease }
+                : {
+                    height: { duration: 0.4, ease: easeOut },
+                  }
+            }
+            className="overflow-hidden border-t border-mb-surface-elevated bg-mb-surface lg:hidden"
+          >
+            <motion.div
+              initial={m.isReduced ? false : { opacity: 0, y: -16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={
+                m.isReduced
+                  ? { duration: 0 }
+                  : {
+                      opacity: { duration: 0.28, ease: easeOut },
+                      y: { type: "spring", stiffness: 420, damping: 34, mass: 0.7 },
+                    }
+              }
+              className="will-change-transform"
             >
-              Winter Warmth Drive
-            </NavLink>
-            <NavLink to="/projects/love-in-action" className={subNavClass} onClick={() => setOpen(false)}>
-              Love In Action
-            </NavLink>
-          </div>
-          <NavLink to="/contact-us" className={navClass} onClick={() => setOpen(false)}>
-            Contact
-          </NavLink>
-        </nav>
-      </div>
+              <nav
+                className="mx-auto flex max-w-6xl flex-col px-4 py-4"
+                aria-label="Mobile"
+              >
+                {mobileLinks.map(({ to, end, label }, i) =>
+                  m.isReduced ? (
+                    <NavLink
+                      key={to}
+                      to={to}
+                      className={navClass}
+                      end={end}
+                      onClick={() => setOpen(false)}
+                    >
+                      {label}
+                    </NavLink>
+                  ) : (
+                    <motion.div
+                      key={to}
+                      initial={{ opacity: 0, x: -14 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{
+                        delay: 0.06 + i * 0.055,
+                        duration: 0.32,
+                        ease: easeOut,
+                      }}
+                      className="[&:not(:first-child)]:mt-0.5"
+                    >
+                      <NavLink
+                        to={to}
+                        className={navClass}
+                        end={end}
+                        onClick={() => setOpen(false)}
+                      >
+                        {label}
+                      </NavLink>
+                    </motion.div>
+                  ),
+                )}
+              </nav>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
-  )
+  );
 }

@@ -1,6 +1,9 @@
 import type { ReactNode } from "react";
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import { FadeIn } from "../components/FadeIn";
 import { PageHeading } from "../components/PageHeading";
+import { useSiteMotion } from "../hooks/useSiteMotion";
 
 type ServiceDetail = {
   title: string;
@@ -126,6 +129,27 @@ const services: ServiceDetail[] = [
 ];
 
 export function Services() {
+  const m = useSiteMotion();
+
+  const cardList = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: m.isReduced ? 0 : m.staggerCards,
+        delayChildren: m.isReduced ? 0 : m.delayCards,
+      },
+    },
+  };
+
+  const cardItem = {
+    hidden: { opacity: m.isReduced ? 1 : 0, y: m.isReduced ? 0 : m.yCard },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: m.section, ease: m.ease },
+    },
+  };
+
   return (
     <>
       <PageHeading
@@ -133,8 +157,8 @@ export function Services() {
         subtitle="Essential resources for everyday living needs."
       />
 
-      <section className="border-b border-mb-mist bg-linear-to-b from-mb-cream to-white">
-        <div className="mx-auto max-w-3xl px-4 py-10 sm:py-12">
+      <section className="border-b border-mb-mist bg-mb-cream">
+        <FadeIn className="mx-auto max-w-3xl px-4 py-10 sm:py-12">
           <p className="text-center text-base leading-relaxed text-mb-ink/85 sm:text-lg">
             Whether you need a safe place to stay tonight, someone to help you
             plan ahead, or a path toward work, Maslow&apos;s Bridge Indy is here
@@ -148,33 +172,42 @@ export function Services() {
             </Link>{" "}
             when you&apos;re ready to connect.
           </p>
-        </div>
+        </FadeIn>
       </section>
 
       <section
-        className="px-4 py-12 sm:py-16"
+        className="bg-mb-cream px-4 py-12 sm:py-16"
         aria-labelledby="services-detail-heading"
       >
         <div className="mx-auto max-w-6xl">
-          <h2
-            id="services-detail-heading"
-            className="font-display text-2xl font-bold text-mb-ink sm:text-3xl"
-          >
-            What we offer
-          </h2>
-          <p className="mt-2 max-w-2xl text-mb-ink/75">
-            Four pillars of support—each one built to address real barriers
-            neighbors face every day.
-          </p>
+          <FadeIn>
+            <h2
+              id="services-detail-heading"
+              className="font-display text-2xl font-bold text-mb-ink sm:text-3xl"
+            >
+              What we offer
+            </h2>
+            <p className="mt-2 max-w-2xl text-mb-ink/75">
+              Four pillars of support—each one built to address real barriers
+              neighbors face every day.
+            </p>
+          </FadeIn>
 
-          <div className="mt-10 grid gap-6 sm:gap-8 lg:grid-cols-2">
+          <motion.div
+            className="mt-10 grid gap-6 sm:gap-8 lg:grid-cols-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.06, margin: "0px 0px -40px 0px" }}
+            variants={cardList}
+          >
             {services.map((service) => (
-              <article
+              <motion.article
                 key={service.title}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-mb-mist/80 bg-white shadow-sm ring-1 ring-black/3 transition hover:border-mb-accent/25 hover:shadow-md"
+                variants={cardItem}
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-mb-mist/80 bg-mb-mist/20 shadow-sm ring-1 ring-black/3 transition hover:border-mb-accent/25 hover:shadow-md"
               >
                 <div
-                  className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-linear-to-r from-mb-hope via-mb-accent to-mb-hope/80 opacity-90"
+                  className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-mb-accent-solid"
                   aria-hidden
                 />
                 <div className="flex flex-1 flex-col p-6 sm:p-8">
@@ -214,13 +247,14 @@ export function Services() {
                     ))}
                   </ul>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <section className="border-t border-mb-mist bg-mb-surface px-4 py-12 sm:py-16">
+        <FadeIn>
         <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 rounded-2xl border border-white/10 bg-mb-surface-elevated/50 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div>
             <h2 className="font-display text-xl font-bold text-mb-text-on-dark sm:text-2xl">
@@ -238,6 +272,7 @@ export function Services() {
             Contact us
           </Link>
         </div>
+        </FadeIn>
       </section>
     </>
   );

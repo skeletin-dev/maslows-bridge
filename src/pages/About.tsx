@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+import { FadeIn } from "../components/FadeIn"
 import { PageHeading } from "../components/PageHeading"
 
 export function About() {
@@ -9,11 +10,8 @@ export function About() {
         subtitle="Empowering the disenfranchised to rebuild their lives."
       />
 
-      <section
-        className="border-b border-mb-mist bg-linear-to-b from-mb-cream via-white to-mb-cream/40"
-        aria-labelledby="vision-mission-heading"
-      >
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
+      <section className="border-b border-mb-mist bg-mb-cream" aria-labelledby="vision-mission-heading">
+        <FadeIn className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
           <h2 id="vision-mission-heading" className="sr-only">
             Vision and mission
           </h2>
@@ -36,11 +34,8 @@ export function About() {
             </p>
           </div>
 
-          <article className="relative mt-12 overflow-hidden rounded-2xl border border-mb-mist/70 bg-linear-to-b from-white to-mb-cream/25 shadow-sm ring-1 ring-black/3">
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-linear-to-r from-mb-accent via-mb-accent-solid to-mb-accent/50"
-              aria-hidden
-            />
+          <article className="relative mt-12 overflow-hidden rounded-2xl border border-mb-mist/70 bg-mb-mist/25 shadow-sm ring-1 ring-black/3">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-mb-accent-solid" aria-hidden />
 
             <div className="px-8 pb-10 pt-9 sm:px-10 sm:pb-12 sm:pt-10">
               <p className="text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">Vision</p>
@@ -56,13 +51,7 @@ export function About() {
               </p>
             </div>
 
-            <div
-              className="h-px bg-linear-to-r from-transparent via-mb-accent/20 to-transparent"
-              role="presentation"
-              aria-hidden
-            />
-
-            <div className="px-8 pb-10 pt-9 sm:px-10 sm:pb-12 sm:pt-10">
+            <div className="border-t border-mb-mist px-8 pb-10 pt-9 sm:px-10 sm:pb-12 sm:pt-10">
               <p className="text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">Mission</p>
               <h3 className="mt-2 font-display text-2xl font-bold text-mb-ink">Serve with compassion</h3>
               <p className="mt-4 text-base leading-relaxed text-mb-ink/88 sm:text-[1.0625rem]">
@@ -83,11 +72,11 @@ export function About() {
               </p>
             </div>
           </article>
-        </div>
+        </FadeIn>
       </section>
 
-      <section className="border-t border-mb-mist bg-mb-cream/80 px-4 py-12 sm:py-16">
-        <div className="mx-auto max-w-3xl text-center">
+      <section className="border-t border-mb-mist bg-mb-cream px-4 py-12 sm:py-16">
+        <FadeIn className="mx-auto max-w-3xl text-center">
           <h2 className="font-display text-xl font-bold text-mb-ink sm:text-2xl">Rooted in Maslow&apos;s hierarchy</h2>
           <p className="mt-4 text-base leading-relaxed text-mb-ink/85 sm:text-lg">
             Our name honors a simple truth: basic needs must be met before people can pursue belonging, esteem, and
@@ -96,14 +85,15 @@ export function About() {
           </p>
           <Link
             to="/services"
-            className="mt-8 inline-flex items-center justify-center rounded-[28px] border border-mb-accent/40 bg-white px-8 py-3.5 text-sm font-semibold text-mb-accent-solid shadow-sm transition hover:border-mb-accent hover:bg-mb-accent/5 sm:text-base"
+            className="mt-8 inline-flex items-center justify-center rounded-[28px] border border-mb-accent/40 bg-mb-cream px-8 py-3.5 text-sm font-semibold text-mb-accent-solid shadow-sm transition hover:border-mb-accent hover:bg-mb-mist/40 sm:text-base"
           >
             Explore our services
           </Link>
-        </div>
+        </FadeIn>
       </section>
 
       <section className="border-t border-mb-mist bg-mb-surface px-4 py-12 sm:py-16">
+        <FadeIn>
         <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 rounded-2xl border border-white/10 bg-mb-surface-elevated/50 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
           <div>
             <h2 className="font-display text-xl font-bold text-mb-text-on-dark sm:text-2xl">Talk with our team</h2>
@@ -118,6 +108,7 @@ export function About() {
             Contact us
           </Link>
         </div>
+        </FadeIn>
       </section>
     </>
   )
