@@ -2,6 +2,9 @@
 export const SITE = {
   name: "Maslow's Bridge",
   tagline: "Empowering the homeless community",
+  /** Warmer, empathetic line for the footer (hero may use `tagline` separately). */
+  footerTagline:
+    "Walking alongside our neighbors—with compassion, dignity, and hope.",
   logoSrc:
     "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=256,fit=crop/YNqMewVXyDSQ4p6z/img_2499-Aq2GP8gjwZcP2WLk.jpg",
   social: {

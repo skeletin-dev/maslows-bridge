@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { useLocation, useOutlet } from "react-router-dom"
 import { useSiteMotion } from "../hooks/useSiteMotion"
@@ -8,6 +9,10 @@ export function Layout() {
   const location = useLocation()
   const outlet = useOutlet()
   const m = useSiteMotion()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [location.pathname])
 
   return (
     <div className="flex min-h-dvh flex-col">
