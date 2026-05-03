@@ -1,0 +1,179 @@
+/* Minimal styling for react-jsonschema-form inside admin forms.
+   Scoped to .rjsf-admin so it doesn't leak. */
+
+.rjsf-admin .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.rjsf-admin .control-label,
+.rjsf-admin legend {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-slate-500, #64748b);
+}
+
+.rjsf-admin .required {
+  color: var(--color-slate-400, #94a3b8);
+  margin-left: 0.125rem;
+}
+
+.rjsf-admin .field-description {
+  margin-top: 0.125rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-slate-500, #64748b);
+}
+
+.rjsf-admin input.form-control,
+.rjsf-admin textarea.form-control,
+.rjsf-admin select.form-control {
+  width: 100%;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-slate-200, #e2e8f0);
+  background-color: color-mix(in oklab, white 50%, transparent);
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  color: var(--color-slate-900, #0f172a);
+  outline: none;
+  transition:
+    border-color 120ms,
+    box-shadow 120ms,
+    background-color 120ms;
+}
+
+.rjsf-admin input.form-control:focus,
+.rjsf-admin textarea.form-control:focus,
+.rjsf-admin select.form-control:focus {
+  border-color: var(--color-slate-400, #94a3b8);
+  background-color: white;
+  box-shadow: 0 0 0 2px rgb(15 23 42 / 10%);
+}
+
+.rjsf-admin textarea.form-control {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.rjsf-admin .field-array {
+  margin-bottom: 1.25rem;
+}
+
+.rjsf-admin .field-array > fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.rjsf-admin .array-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: start;
+  margin-bottom: 0.5rem;
+}
+
+.rjsf-admin .array-item > div:first-child {
+  min-width: 0;
+}
+
+.rjsf-admin .array-item-toolbox {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.rjsf-admin .btn,
+.rjsf-admin button.array-item-add,
+.rjsf-admin button.array-item-remove,
+.rjsf-admin button.array-item-move-up,
+.rjsf-admin button.array-item-move-down,
+.rjsf-admin button.array-item-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-slate-200, #e2e8f0);
+  background-color: white;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-slate-800, #1e293b);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 5%);
+  cursor: pointer;
+}
+
+.rjsf-admin button.array-item-add {
+  margin-top: 0.5rem;
+}
+
+.rjsf-admin button.array-item-remove {
+  color: var(--color-red-800, #991b1b);
+  border-color: var(--color-red-200, #fecaca);
+  background-color: color-mix(in oklab, #fef2f2 80%, transparent);
+}
+
+.rjsf-admin button:hover {
+  background-color: var(--color-slate-50, #f8fafc);
+}
+
+.rjsf-admin button.array-item-remove:hover {
+  background-color: var(--color-red-100, #fee2e2);
+}
+
+.rjsf-admin .error-detail {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0 0;
+  font-size: 0.875rem;
+  color: var(--color-red-800, #991b1b);
+}
+
+.rjsf-admin .text-danger {
+  color: var(--color-red-800, #991b1b);
+}
+
+.rjsf-admin .panel.errors,
+.rjsf-admin .panel-danger {
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-red-200, #fecaca);
+  background-color: color-mix(in oklab, #fef2f2 85%, transparent);
+  padding: 0.75rem 0.875rem;
+  color: var(--color-red-900, #7f1d1d);
+  font-size: 0.875rem;
+  margin-bottom: 1.25rem;
+}
+
+.rjsf-admin .panel.errors .panel-heading,
+.rjsf-admin .panel-danger .panel-heading {
+  margin: 0 0 0.375rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-red-800, #991b1b);
+}
+
+.rjsf-admin .panel.errors .panel-title,
+.rjsf-admin .panel-danger .panel-title {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.rjsf-admin .panel.errors .list-group,
+.rjsf-admin .panel-danger .list-group {
+  list-style: disc inside;
+  padding: 0;
+  margin: 0;
+}
+
+.rjsf-admin .panel.errors .list-group-item,
+.rjsf-admin .panel-danger .list-group-item {
+  padding: 0.125rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-red-900, #7f1d1d);
+}

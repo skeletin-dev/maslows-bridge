@@ -5,6 +5,7 @@ import { SITE } from "../site"
 const FOOTER_NAV = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
+  { to: "/projects", label: "Projects" },
   { to: "/about", label: "About" },
   { to: "/history", label: "History" },
   { to: "/team", label: "Team" },

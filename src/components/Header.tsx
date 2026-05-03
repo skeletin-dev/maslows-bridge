@@ -15,6 +15,7 @@ const navClass = ({ isActive }: { isActive: boolean }) =>
 const mobileLinks: { to: string; end?: boolean; label: string }[] = [
   { to: "/", end: true, label: "Home" },
   { to: "/services", label: "Services" },
+  { to: "/projects", label: "Projects" },
   { to: "/about", label: "About" },
   { to: "/history", label: "History" },
   { to: "/team", label: "Team" },
@@ -56,6 +57,9 @@ export function Header() {
           </NavLink>
           <NavLink to="/services" className={navClass}>
             Services
+          </NavLink>
+          <NavLink to="/projects" className={navClass}>
+            Projects
           </NavLink>
           <NavLink to="/about" className={navClass}>
             About
