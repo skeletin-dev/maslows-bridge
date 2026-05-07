@@ -7,7 +7,7 @@ import ValidationError from "../../errors/validationError";
 export default async function handleResponse<T>(
   response: Response,
 ): Promise<T> {
-  if (response.status === 204) return;
+  if (response.status === 204) return undefined as T;
   try {
     const data = await response.json();
     if (!response.ok)
@@ -16,7 +16,6 @@ export default async function handleResponse<T>(
         response.status,
         (data as ApiErrorResponseData).errors,
       );
-    console.log("here");
     return data as T;
   } catch (e) {
     if (e instanceof ApiError) {

@@ -1,115 +1,292 @@
-import { Link } from "react-router-dom"
-import { FadeIn } from "../components/FadeIn"
-import { PageHeading } from "../components/PageHeading"
+import { Link } from "react-router-dom";
+import { FadeIn, StaggerItem, StaggerList } from "../components/FadeIn";
+import { PageHero } from "../components/PageHero";
+import {
+  pillPrimary,
+  sectionDarkGlow,
+  sectionLight,
+  sectionLightGlow,
+} from "../components/pageLayout";
+
+const values = [
+  {
+    num: "01",
+    title: "Dignity",
+    body: "Every person we serve is seen as a whole human being—not a case number, not a category. We listen before we act.",
+  },
+  {
+    num: "02",
+    title: "Presence",
+    body: "We stay in the story after the emergency passes. Long-term support is how change actually sticks.",
+  },
+  {
+    num: "03",
+    title: "Agency",
+    body: "People define what stability means for themselves. We offer tools and advocacy, not prescription.",
+  },
+];
+
+const needs = [
+  { label: "Safety & Shelter", desc: "A stable place to sleep and feel secure" },
+  { label: "Nourishment & Care", desc: "Food, health, and physical wellbeing" },
+  { label: "Belonging", desc: "Community, relationships, and support" },
+  { label: "Esteem & Purpose", desc: "Recognition, contribution, and goals" },
+  { label: "Self-Fulfillment", desc: "Growth, creativity, and full potential" },
+];
 
 export function About() {
   return (
     <>
-      <PageHeading
+      <PageHero
+        eyebrow="Who we are"
         title="About Us"
         subtitle="Empowering the disenfranchised to rebuild their lives."
+        variant="atmosphere"
       />
 
-      <section className="border-b border-mb-mist bg-mb-cream" aria-labelledby="vision-mission-heading">
-        <FadeIn className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
+      {/* ── OPENING STATEMENT ── */}
+      <section className={sectionLightGlow} aria-labelledby="vision-mission-heading">
+        <FadeIn className="mx-auto max-w-3xl">
           <h2 id="vision-mission-heading" className="sr-only">
             Vision and mission
           </h2>
 
-          <p className="text-lg font-medium leading-relaxed text-mb-ink sm:text-xl">
-            Our vision is a world where no one faces crisis alone. Maslow&apos;s Bridge stands as a constant source of
-            care and empowerment, helping individuals move from struggle to stability.
+          <div className="mb-6 h-0.5 w-12 bg-mb-accent" aria-hidden />
+          <p className="font-display text-2xl font-bold leading-snug text-mb-ink sm:text-3xl">
+            Our vision is a world where no one faces crisis alone.
           </p>
-          <div className="mt-8 space-y-5 text-base leading-relaxed text-mb-ink/88 sm:text-lg">
+          <div className="mt-8 space-y-5 text-base leading-relaxed text-mb-ink/80 sm:text-lg">
             <p>
-              Crisis rarely arrives with a roadmap. For many neighbors, instability compounds—housing, health,
-              income, and relationships can unravel at once. We believe people deserve more than a cold referral
-              or a single meal: they deserve steady presence, honest information, and advocates who remember their
-              name.
+              Crisis rarely arrives with a roadmap. For many neighbors, instability compounds—housing,
+              health, income, and relationships can unravel at once. We believe people deserve more than
+              a cold referral or a single meal: they deserve steady presence, honest information, and
+              advocates who remember their name.
             </p>
             <p>
-              That is why Maslow&apos;s Bridge shows up as a partner for the long arc—not only in the urgent moment,
-              but in the slow, courageous work of rebuilding. We walk alongside individuals with respect for their
-              story, their agency, and their right to define what stability means for them.
+              That is why Maslow&apos;s Bridge shows up as a partner for the long arc—not only in the
+              urgent moment, but in the slow, courageous work of rebuilding. We walk alongside
+              individuals with respect for their story, their agency, and their right to define what
+              stability means for them.
             </p>
           </div>
-
-          <article className="relative mt-12 overflow-hidden rounded-2xl border border-mb-mist/70 bg-mb-mist/25 shadow-sm ring-1 ring-black/3">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-mb-accent-solid" aria-hidden />
-
-            <div className="px-8 pb-10 pt-9 sm:px-10 sm:pb-12 sm:pt-10">
-              <p className="text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">Vision</p>
-              <h3 className="mt-2 font-display text-2xl font-bold text-mb-ink">A community where crisis is shared</h3>
-              <p className="mt-4 text-base leading-relaxed text-mb-ink/88 sm:text-[1.0625rem]">
-                We imagine neighborhoods—and a wider society—where isolation is not the price of hardship. When
-                someone stumbles, there are hands to steady them: mentors, peers, and organizations willing to stay
-                in the story after the emergency passes.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-mb-ink/88 sm:text-[1.0625rem]">
-                Maslow&apos;s Bridge exists to be one of those steady hands in Indianapolis: a bridge from
-                uncertainty toward clarity, from survival toward the dignity of choice.
-              </p>
-            </div>
-
-            <div className="border-t border-mb-mist px-8 pb-10 pt-9 sm:px-10 sm:pb-12 sm:pt-10">
-              <p className="text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">Mission</p>
-              <h3 className="mt-2 font-display text-2xl font-bold text-mb-ink">Serve with compassion</h3>
-              <p className="mt-4 text-base leading-relaxed text-mb-ink/88 sm:text-[1.0625rem]">
-                Our mission is to serve those experiencing homelessness with compassion, providing essential resources
-                and pathways toward stability, dignity, and renewed purpose.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-mb-ink/88 sm:text-[1.0625rem]">
-                Compassion, for us, is practical: it shows up as patient listening, accessible services, and
-                referrals that fit real lives—not checklists. We connect people to food, shelter, employment
-                support, and case management because those building blocks matter; we also make room for hope,
-                creativity, and the belief that a next chapter is possible.
-              </p>
-              <p className="mt-4 text-base leading-relaxed text-mb-ink/88 sm:text-[1.0625rem]">
-                <span className="font-semibold text-mb-ink">Stability</span> means safer nights and dependable
-                support. <span className="font-semibold text-mb-ink">Dignity</span> means being seen as a whole
-                person. <span className="font-semibold text-mb-ink">Renewed purpose</span> means rediscovering
-                contribution, belonging, and goals that feel within reach.
-              </p>
-            </div>
-          </article>
         </FadeIn>
       </section>
 
-      <section className="border-t border-mb-mist bg-mb-cream px-4 py-12 sm:py-16">
-        <FadeIn className="mx-auto max-w-3xl text-center">
-          <h2 className="font-display text-xl font-bold text-mb-ink sm:text-2xl">Rooted in Maslow&apos;s hierarchy</h2>
-          <p className="mt-4 text-base leading-relaxed text-mb-ink/85 sm:text-lg">
-            Our name honors a simple truth: basic needs must be met before people can pursue belonging, esteem, and
-            self-fulfillment. We meet people at the foundation—safety, nourishment, shelter, and care—while keeping
-            the fuller horizon in view. Every program and referral is a step toward a life that feels whole again.
-          </p>
-          <Link
-            to="/services"
-            className="mt-8 inline-flex items-center justify-center rounded-[28px] border border-mb-accent/40 bg-mb-cream px-8 py-3.5 text-sm font-semibold text-mb-accent-solid shadow-sm transition hover:border-mb-accent hover:bg-mb-mist/40 sm:text-base"
-          >
-            Explore our services
-          </Link>
-        </FadeIn>
-      </section>
-
-      <section className="border-t border-mb-mist bg-mb-surface px-4 py-12 sm:py-16">
-        <FadeIn>
-        <div className="mx-auto flex max-w-4xl flex-col items-start gap-6 rounded-2xl border border-white/10 bg-mb-surface-elevated/50 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
-          <div>
-            <h2 className="font-display text-xl font-bold text-mb-text-on-dark sm:text-2xl">Talk with our team</h2>
-            <p className="mt-2 max-w-xl text-mb-text-muted">
-              Questions about who we are, how to volunteer, or how to get help? We&apos;d love to hear from you.
+      {/* ── VISION + MISSION ── */}
+      <section className={sectionDarkGlow} aria-labelledby="vision-heading">
+        <div className="mx-auto max-w-6xl">
+          <FadeIn className="mb-10 sm:mb-12">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mb-accent">
+              Our foundation
             </p>
+            <h2
+              id="vision-heading"
+              className="mt-2 font-display text-2xl font-bold text-mb-text-on-dark sm:text-3xl"
+            >
+              Vision &amp; mission
+            </h2>
+            <div className="mt-4 h-px max-w-xs bg-white/10" aria-hidden />
+          </FadeIn>
+
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
+            <FadeIn delay={0.05}>
+              <article className="flex h-full flex-col rounded-xl border border-white/12 bg-mb-surface-elevated/55 p-8 shadow-mb-glass backdrop-blur-sm transition-[border-color] duration-[250ms] hover:border-white/20 sm:p-10">
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-mb-accent/15 text-xs font-bold tabular-nums text-mb-accent ring-1 ring-mb-accent/20">
+                    V
+                  </span>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-mb-accent">
+                    Vision
+                  </p>
+                </div>
+                <h3 className="font-display text-xl font-bold text-mb-text-on-dark sm:text-2xl">
+                  A community where crisis is shared
+                </h3>
+                <div className="mt-4 space-y-4 text-base leading-relaxed text-mb-text-on-dark/85">
+                  <p>
+                    We imagine neighborhoods—and a wider society—where isolation is not the price of
+                    hardship. When someone stumbles, there are hands to steady them: mentors, peers, and
+                    organizations willing to stay in the story after the emergency passes.
+                  </p>
+                  <p>
+                    Maslow&apos;s Bridge exists to be one of those steady hands in Indianapolis: a bridge
+                    from uncertainty toward clarity, from survival toward the dignity of choice.
+                  </p>
+                </div>
+              </article>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <article className="flex h-full flex-col rounded-xl border border-mb-accent/20 bg-mb-surface-elevated/55 p-8 shadow-mb-glass backdrop-blur-sm transition-[border-color] duration-[250ms] hover:border-mb-accent/35 sm:p-10">
+                <div className="mb-5 flex items-center gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-mb-accent/15 text-xs font-bold text-mb-accent ring-1 ring-mb-accent/20">
+                    M
+                  </span>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-mb-accent">
+                    Mission
+                  </p>
+                </div>
+                <h3 className="font-display text-xl font-bold text-mb-text-on-dark sm:text-2xl">
+                  Serve with compassion
+                </h3>
+                <div className="mt-4 space-y-4 text-base leading-relaxed text-mb-text-on-dark/85">
+                  <p>
+                    Our mission is to serve those experiencing homelessness with compassion, providing
+                    essential resources and pathways toward stability, dignity, and renewed purpose.
+                  </p>
+                  <p>
+                    Compassion, for us, is practical: patient listening, accessible services, and
+                    referrals that fit real lives—not checklists.
+                  </p>
+                </div>
+                <div className="mt-6 grid grid-cols-3 gap-3 border-t border-white/10 pt-6">
+                  {["Stability", "Dignity", "Purpose"].map((word) => (
+                    <div key={word} className="rounded-lg bg-mb-surface/50 px-3 py-2 text-center">
+                      <p className="text-xs font-semibold text-mb-text-on-dark">{word}</p>
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </FadeIn>
           </div>
-          <Link
-            to="/contact-us"
-            className="inline-flex shrink-0 items-center justify-center rounded-[28px] bg-mb-accent px-8 py-3.5 text-sm font-semibold text-mb-surface transition hover:bg-mb-accent-hover sm:text-base"
-          >
-            Contact us
-          </Link>
         </div>
+      </section>
+
+      {/* ── CORE VALUES ── */}
+      <section className={sectionLight} aria-labelledby="values-heading">
+        <div className="mx-auto max-w-6xl">
+          <FadeIn>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mb-accent-solid">
+                  How we work
+                </p>
+                <h2
+                  id="values-heading"
+                  className="mt-2 font-display text-2xl font-bold text-mb-ink sm:text-3xl"
+                >
+                  Core values
+                </h2>
+              </div>
+            </div>
+            <div className="mt-6 h-px bg-mb-mist" aria-hidden />
+          </FadeIn>
+
+          <StaggerList className="mt-10 grid gap-6 sm:gap-8 lg:grid-cols-3">
+            {values.map((v) => (
+              <StaggerItem key={v.num}>
+                <article className="group relative h-full overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-[transform,box-shadow] motion-safe:duration-[250ms] motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
+                  <div className="absolute inset-x-0 top-0 h-0.5 bg-mb-accent" aria-hidden />
+                  <div className="flex h-full flex-col p-7 pt-8 sm:p-8 sm:pt-9">
+                    <p
+                      className="font-display font-bold leading-none text-mb-mist"
+                      style={{ fontSize: "clamp(2.5rem, 7vw, 4rem)" }}
+                      aria-hidden
+                    >
+                      {v.num}
+                    </p>
+                    <h3 className="mt-4 font-sans text-xl font-semibold tracking-tight text-mb-ink">
+                      {v.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-base leading-relaxed text-mb-ink/78">
+                      {v.body}
+                    </p>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </StaggerList>
+        </div>
+      </section>
+
+      {/* ── MASLOW'S HIERARCHY ── */}
+      <section className={sectionDarkGlow} aria-labelledby="hierarchy-heading">
+        <div className="mx-auto max-w-6xl">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <FadeIn>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-mb-accent">
+                Our name
+              </p>
+              <h2
+                id="hierarchy-heading"
+                className="mt-3 font-display text-2xl font-bold text-mb-text-on-dark sm:text-3xl"
+              >
+                Rooted in Maslow&apos;s hierarchy
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-mb-text-on-dark/80 sm:text-lg">
+                Our name honors a simple truth: basic needs must be met before people can pursue
+                belonging, esteem, and self-fulfillment. We meet people at the foundation—safety,
+                nourishment, shelter, and care—while keeping the fuller horizon in view.
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-mb-text-on-dark/80">
+                Every program and referral is a step toward a life that feels whole again.
+              </p>
+              <Link to="/services" className={`${pillPrimary} mt-8`}>
+                Explore our services
+              </Link>
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <div className="space-y-2" role="list" aria-label="Maslow's hierarchy of needs">
+                {needs.map((need, i) => (
+                  <div
+                    key={need.label}
+                    role="listitem"
+                    className="flex items-center gap-4 rounded-xl border border-white/10 bg-mb-surface-elevated/45 px-5 py-4 backdrop-blur-sm transition-[border-color,background-color] duration-[200ms] hover:border-mb-accent/25 hover:bg-mb-surface-elevated/65"
+                    style={{ marginInline: `${i * 8}px` }}
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-mb-accent/15 text-xs font-bold tabular-nums text-mb-accent">
+                      {5 - i}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-mb-text-on-dark">{need.label}</p>
+                      <p className="text-xs text-mb-text-muted">{need.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA BAND ── */}
+      <section className="relative overflow-hidden border-t border-white/10 bg-mb-surface px-4 py-20 sm:py-28">
+        <div
+          className="pointer-events-none absolute -right-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-mb-accent/8 blur-3xl"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-mb-accent/40 to-transparent"
+          aria-hidden
+        />
+        <FadeIn>
+          <div className="relative mx-auto flex max-w-4xl flex-col gap-10 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <div className="mb-5 h-0.5 w-12 bg-mb-accent" aria-hidden />
+              <h2 className="font-display text-3xl font-bold tracking-tight text-mb-text-on-dark sm:text-4xl">
+                Talk with our team
+              </h2>
+              <p className="mt-4 max-w-lg text-base leading-relaxed text-mb-text-on-dark/75">
+                Questions about who we are, how to volunteer, or how to get help? We&apos;d love to
+                hear from you.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
+              <Link to="/contact-us" className={`${pillPrimary} py-4 text-base`}>
+                Contact us
+                <span aria-hidden className="ml-1">→</span>
+              </Link>
+              <Link
+                to="/services"
+                className="focus-ring inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/8 px-7 py-4 text-sm font-semibold text-mb-text-on-dark transition-[border-color,background-color] duration-200 hover:border-mb-accent/45 hover:bg-white/12 sm:text-base"
+              >
+                Our services
+              </Link>
+            </div>
+          </div>
         </FadeIn>
       </section>
     </>
-  )
+  );
 }

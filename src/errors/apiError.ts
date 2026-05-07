@@ -11,6 +11,6 @@ export class ApiError extends Error {
     super(message, { cause });
     this.name = "ApiError";
     this.status = status;
-    this.errors = errors;
+    this.errors = errors ?? {};
   }
 }

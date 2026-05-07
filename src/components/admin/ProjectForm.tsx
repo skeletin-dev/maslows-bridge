@@ -95,7 +95,7 @@ const projectUiSchema: UiSchema = {
   },
   description: {
     "ui:widget": "textarea",
-    "ui:options": { rows: 4 },
+    "ui:options": { rows: 5 },
   },
   use_of_funds: {
     "ui:field": "useOfFunds",
@@ -136,8 +136,6 @@ function toPayload(f: ProjectFormData): NewProject {
   };
 }
 
-// Treat empty strings on top-level scalar fields as missing values so
-// `required` validation fires (and `format: date` doesn't complain about "").
 function normalizeFormData(f: ProjectFormData): ProjectFormData {
   const next: ProjectFormData = { ...f };
   for (const key of Object.keys(next) as (keyof ProjectFormData)[]) {
@@ -171,9 +169,7 @@ function transformErrors(errors: RJSFValidationError[]): RJSFValidationError[] {
         break;
       case "maxLength": {
         const limit = err.params?.limit;
-        message = limit
-          ? `must be ${limit} characters or fewer`
-          : "is too long";
+        message = limit ? `must be ${limit} characters or fewer` : "is too long";
         break;
       }
       case "format":
@@ -183,17 +179,11 @@ function transformErrors(errors: RJSFValidationError[]): RJSFValidationError[] {
         message = "has an invalid value";
         break;
     }
-
     const stack = `${label} ${message}`;
     const dedupeKey = `${property}|${err.name}|${message}`;
     if (seen.has(dedupeKey)) continue;
     seen.add(dedupeKey);
-
-    out.push({
-      ...err,
-      message,
-      stack,
-    });
+    out.push({ ...err, message, stack });
   }
   return out;
 }
@@ -237,12 +227,15 @@ export function ProjectForm({
   return (
     <div className="rjsf-admin">
       {formError ? (
-        <p
-          className="mb-4 rounded-md border border-red-200/90 bg-red-50 px-3 py-2.5 text-sm text-red-900"
+        <div
+          className="mb-5 flex items-start gap-2.5 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
           role="alert"
         >
+          <svg className="mt-0.5 h-4 w-4 shrink-0 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
           {formError}
-        </p>
+        </div>
       ) : null}
 
       <Form
@@ -265,14 +258,25 @@ export function ProjectForm({
           onSubmit(toPayload(e.formData as ProjectFormData));
         }}
       >
-        <div className="mt-6">
+        <div className="mt-6 flex items-center gap-3 border-t border-slate-200 pt-5">
           <button
             type="submit"
             disabled={submitting}
-            className="inline-flex min-w-36 items-center justify-center rounded-md bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 disabled:opacity-50"
+            className="inline-flex min-w-36 cursor-pointer items-center justify-center gap-2 rounded-md bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:ring-3 focus:ring-blue-500/25 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {submitting ? "Saving…" : submitLabel}
+            {submitting ? (
+              <>
+                <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden>
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                Saving…
+              </>
+            ) : submitLabel}
           </button>
+          <p className="text-xs text-slate-400">
+            {submitting ? "Submitting to API…" : "All required fields must be valid before saving."}
+          </p>
         </div>
       </Form>
     </div>

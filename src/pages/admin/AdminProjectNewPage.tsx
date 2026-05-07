@@ -29,13 +29,13 @@ export function AdminProjectNewPage() {
     : null;
 
   return (
-    <div>
+    <>
       <AdminPageHeader
         title="New project"
-        description="All required fields must match the validation rules of the public API."
-        breadcrumbs={[{ label: "Projects", to: "/admin" }, { label: "New" }]}
+        description="Fill in all required fields. The record will be live after your next publish."
+        breadcrumbs={[{ label: "Projects", to: "/admin" }, { label: "New project" }]}
       />
-      <div className="mt-8 border-t border-slate-200/80 pt-8">
+      <div className="px-6 py-6">
         <ProjectForm
           key="new"
           project={null}
@@ -46,6 +46,6 @@ export function AdminProjectNewPage() {
           onSubmit={handleCreate}
         />
       </div>
-    </div>
+    </>
   );
 }
