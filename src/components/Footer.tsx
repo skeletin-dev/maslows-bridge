@@ -172,6 +172,28 @@ export function Footer() {
             <p className="text-xs text-mb-text-on-dark/35">Indianapolis, Indiana</p>
           </div>
         </div>
+        <div className="mt-10 flex flex-col items-center gap-3 border-t border-white/10 pt-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+            <span className="text-[0.625rem] font-semibold uppercase tracking-[0.22em] text-mb-text-on-dark/45">
+              Powered by
+            </span>
+            <a
+              href="https://skeletin.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring group inline-flex shrink-0 rounded-sm outline-offset-4"
+              aria-label="Skeletin — visit skeletin.dev"
+            >
+              <img
+                src="/skeletin_black_logo.svg"
+                alt=""
+                width={326}
+                height={55}
+                className="h-5 w-auto transition-[filter] duration-200 ease-out group-hover:invert sm:h-6"
+              />
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   )
