@@ -12,12 +12,19 @@ import { Contact } from "./pages/Contact";
 import { History } from "./pages/History";
 import { Home } from "./pages/Home";
 import { NotFound } from "./pages/NotFound";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 import { ProjectShow } from "./pages/ProjectShow";
 import { Projects } from "./pages/Projects";
 import { Services } from "./pages/Services";
 import { Team } from "./pages/Team";
+import emailjs from "@emailjs/browser";
+import { useEffect } from "react";
 
 export default function App() {
+  useEffect(() => {
+    emailjs.init(import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY);
+  }, []);
+
   return (
     <Routes>
       <Route path="/admin/login" element={<AdminLoginPage />} />
@@ -39,6 +46,7 @@ export default function App() {
         <Route path="/history" element={<History />} />
         <Route path="/team" element={<Team />} />
         <Route path="/contact-us" element={<Contact />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectShow />} />
         <Route path="/*" element={<NotFound />} />

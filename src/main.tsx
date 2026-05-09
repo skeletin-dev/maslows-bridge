@@ -7,9 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
-// If you expose it for debugging
-// window.__queryClient = queryClient;
-
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>

@@ -155,13 +155,22 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-14 flex flex-col items-start gap-3 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col items-start gap-4 border-t border-white/10 pt-8 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <p className="text-sm text-mb-text-on-dark/55">
             © {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
-          <p className="text-xs text-mb-text-on-dark/35">
-            Indianapolis, Indiana
-          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
+            <Link
+              to="/privacy-policy"
+              className="focus-ring rounded-md text-mb-text-on-dark/70 transition-colors duration-200 hover:text-mb-accent"
+            >
+              Privacy Policy
+            </Link>
+            <span className="hidden text-mb-text-on-dark/25 sm:inline" aria-hidden>
+              ·
+            </span>
+            <p className="text-xs text-mb-text-on-dark/35">Indianapolis, Indiana</p>
+          </div>
         </div>
       </div>
     </footer>

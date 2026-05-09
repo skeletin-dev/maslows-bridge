@@ -1,31 +1,19 @@
 import { useState } from "react";
+import type { SubmitEvent, ChangeEvent } from "react";
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 import {
   Mail,
-  Phone,
   MapPin,
-  Clock,
   Send,
   CheckCircle,
   AlertCircle,
   Loader2,
   Sparkles,
-  Heart,
   Users,
 } from "lucide-react";
 import { PageHero } from "../components/PageHero";
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
-
-interface FormState {
-  status: "idle" | "loading" | "success" | "error";
-  message: string;
-}
+import submitContactInfo from "../network/helpers/submitContactInfo";
 
 const contactInfo = [
   {
@@ -38,30 +26,12 @@ const contactInfo = [
     ),
   },
   {
-    icon: <Phone className="w-5 h-5" />,
-    title: "Call Us",
-    content: "+1 (555) 123-4567",
-    subContent: "Mon–Fri 9am–5pm EST",
-    accent: (
-      <Heart className="w-4 h-4 absolute -top-1 -right-1 text-mb-accent" />
-    ),
-  },
-  {
     icon: <MapPin className="w-5 h-5" />,
     title: "Visit Us",
-    content: "123 Bridge Avenue",
-    subContent: "New York, NY 10001",
+    content: " 5339 E 34th St",
+    subContent: "Indianapolis, IN 46218",
     accent: (
       <Users className="w-4 h-4 absolute -top-1 -right-1 text-mb-accent" />
-    ),
-  },
-  {
-    icon: <Clock className="w-5 h-5" />,
-    title: "Office Hours",
-    content: "Monday – Friday",
-    subContent: "9:00 AM – 5:00 PM",
-    accent: (
-      <CheckCircle className="w-4 h-4 absolute -top-1 -right-1 text-mb-accent" />
     ),
   },
 ];
@@ -97,16 +67,35 @@ export function Contact() {
   });
 
   function handleInputChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
     setFormState({ status: "loading", message: "" });
-    // TODO: wire up your submission handler here
+    try {
+      await submitContactInfo(formData);
+      setFormState({
+        status: "success",
+        message: "Thank you for reaching out! We will touch base soon!",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (e) {
+      console.log(e);
+      setFormState({
+        status: "error",
+        message:
+          "We couldn’t send your message right now. Please try again in a moment, or email us at info@maslowsbridge.org.",
+      });
+    }
   }
 
   const inputClass =
@@ -144,30 +133,30 @@ export function Contact() {
               <motion.div
                 className="absolute right-10 top-20 h-40 w-40 rounded-full bg-mb-accent/10 blur-3xl"
                 animate={{ y: [0, -20, 0], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
                 aria-hidden
               />
               <motion.div
                 className="absolute bottom-20 left-10 h-32 w-32 rounded-full bg-mb-hope/15 blur-3xl"
                 animate={{ y: [0, 20, 0], opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
                 aria-hidden
               />
 
               <div className="relative z-10">
                 {/* Eyebrow + heading */}
                 <motion.div variants={itemVariants} className="mb-8">
-                  <motion.span
-                    className="mb-2 flex items-center gap-2 text-sm font-medium text-mb-accent"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                  >
-                    <Sparkles className="h-4 w-4" />
-                    GET IN TOUCH
-                  </motion.span>
                   <h2 className="font-display mb-4 text-4xl font-light text-mb-text-on-dark md:text-5xl">
-                    Contact Us
+                    Contact
                   </h2>
                   <motion.div
                     className="h-1 bg-mb-accent"
@@ -182,8 +171,9 @@ export function Contact() {
                   className="mb-12 leading-relaxed text-white/80"
                   variants={itemVariants}
                 >
-                  We're here to help and answer any questions you might have. We look
-                  forward to hearing from you and making a difference together.
+                  We're here to help and answer any questions you might have. We
+                  look forward to hearing from you and making a difference
+                  together.
                 </motion.p>
 
                 {/* Contact info cards */}
@@ -211,8 +201,12 @@ export function Contact() {
                             <h3 className="mb-1 font-medium text-white transition-colors duration-300 group-hover:text-mb-accent">
                               {info.title}
                             </h3>
-                            <p className="text-sm text-white/70">{info.content}</p>
-                            <p className="mt-1 text-xs text-white/50">{info.subContent}</p>
+                            <p className="text-sm text-white/70">
+                              {info.content}
+                            </p>
+                            <p className="mt-1 text-xs text-white/50">
+                              {info.subContent}
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -224,26 +218,39 @@ export function Contact() {
                 <motion.div
                   className="absolute bottom-8 right-8 h-3 w-3 rounded-full bg-mb-accent"
                   animate={{ y: [0, -10, 0], opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
                   aria-hidden
                 />
                 <motion.div
                   className="absolute right-12 top-1/3 h-2 w-2 rounded-full bg-mb-hope"
                   animate={{ y: [0, 10, 0], opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5,
+                  }}
                   aria-hidden
                 />
               </div>
             </motion.div>
 
             {/* ── Right — form ── */}
-            <motion.div className="bg-white p-8 md:p-12" variants={itemVariants}>
+            <motion.div
+              className="bg-white p-8 md:p-12"
+              variants={itemVariants}
+            >
               <motion.div variants={itemVariants} className="mb-8">
                 <h2 className="font-display mb-2 text-3xl font-light text-mb-ink">
                   Send us a message
                 </h2>
                 <p className="text-mb-ink/60">
-                  Fill out the form below and we'll get back to you as soon as possible.
+                  Fill out the form below and we'll get back to you as soon as
+                  possible.
                 </p>
               </motion.div>
 
@@ -385,14 +392,13 @@ export function Contact() {
                 className="mt-8 border-t border-mb-ink/10 pt-8"
               >
                 <p className="text-center text-sm text-mb-ink/60">
-                  By submitting this form, you agree to our{" "}
-                  <a href="#" className="text-mb-accent hover:underline">
+                  By submitting this form, you acknowledge our{" "}
+                  <Link
+                    to="/privacy-policy"
+                    className="focus-ring font-medium text-mb-accent underline-offset-2 hover:underline"
+                  >
                     Privacy Policy
-                  </a>{" "}
-                  and{" "}
-                  <a href="#" className="text-mb-accent hover:underline">
-                    Terms of Service
-                  </a>
+                  </Link>
                   .
                 </p>
               </motion.div>

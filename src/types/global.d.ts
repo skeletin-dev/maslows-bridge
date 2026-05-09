@@ -44,4 +44,16 @@ declare global {
     errors?: Record<string, string[]>;
     message: string;
   };
+
+  interface ContactFormData {
+    name: string;
+    email: string;
+    phone: string;
+    message: string;
+  }
+
+  interface FormState {
+    status: "idle" | "loading" | "success" | "error";
+    message: string;
+  }
 }
