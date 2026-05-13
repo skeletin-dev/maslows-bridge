@@ -1,1 +1,1 @@
-export const API = import.meta.env.VITE_BACKEND_URL;
+export const API = import.meta.env.PUBLIC_BACKEND_URL ?? "";

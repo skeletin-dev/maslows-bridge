@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactPage from "../../components/marketing/ContactPage.astro";
+import { ContactForm } from "../../components/ContactForm";
+---
+
+<BaseLayout title="Contact Us | Maslow's Bridge">
+  <ContactPage>
+    <ContactForm slot="form" client:load />
+  </ContactPage>
+</BaseLayout>

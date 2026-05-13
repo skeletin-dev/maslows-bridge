@@ -8,7 +8,7 @@ export const SITE = {
   logoSrc:
     "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=256,fit=crop/YNqMewVXyDSQ4p6z/img_2499-Aq2GP8gjwZcP2WLk.jpg",
   /** Full-bleed home hero (atmospheric city / dusk — swap for brand photography anytime). */
-  heroBackgroundSrc: "/indianapolis.jpg",
+  heroBackgroundSrc: "/indianapolis.webp",
   social: {
     facebook: "https://www.facebook.com/maslowsbridge",
     instagram: "https://www.instagram.com/maslowsbridge",

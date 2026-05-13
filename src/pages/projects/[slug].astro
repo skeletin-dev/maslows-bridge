@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectDetail from "../../components/marketing/ProjectDetail.astro";
+import api from "../../network/api";
+
+export async function getStaticPaths() {
+  const projects = await api.projects.getAll();
+
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<BaseLayout title={`${project.title} | Maslow's Bridge`}>
+  <ProjectDetail project={project} />
+</BaseLayout>

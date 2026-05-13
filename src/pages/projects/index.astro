@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectsPage from "../../components/marketing/ProjectsPage.astro";
+import api from "../../network/api";
+
+const projects = await api.projects.getAll();
+---
+
+<BaseLayout title="Projects | Maslow's Bridge">
+  <ProjectsPage projects={projects} />
+</BaseLayout>
