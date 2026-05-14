@@ -27,7 +27,8 @@ const year = new Date().getFullYear();
   <div class="relative mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 sm:pb-12 sm:pt-16">
     <div class="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
       <div class="sm:col-span-2 lg:col-span-5">
-        <a
+        <a  
+          data-astro-prefetch
           href="/"
           class="focus-ring inline-flex cursor-pointer items-center gap-3 rounded-lg p-1 outline-offset-4 transition-opacity duration-200 hover:opacity-85"
         >
@@ -60,6 +61,7 @@ const year = new Date().getFullYear();
             </svg>
           </a>
           <a
+            data-astro-prefetch
             href={SITE.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
@@ -111,6 +113,7 @@ const year = new Date().getFullYear();
           Follow along or reach out—we read every message and respond personally.
         </p>
         <a
+          data-astro-prefetch
           href="/contact-us"
           class="focus-ring mt-5 inline-flex cursor-pointer items-center gap-2 rounded-lg bg-mb-accent px-5 py-2.5 text-sm font-semibold text-mb-surface transition-[background-color,transform] duration-200 hover:bg-mb-accent-hover motion-safe:hover:scale-[1.02]"
         >
@@ -131,6 +134,7 @@ const year = new Date().getFullYear();
       </p>
       <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
         <a
+          data-astro-prefetch
           href="/privacy-policy"
           class="focus-ring rounded-md text-mb-text-on-dark/70 transition-colors duration-200 hover:text-mb-accent"
         >

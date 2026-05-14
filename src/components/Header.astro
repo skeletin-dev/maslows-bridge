@@ -62,6 +62,7 @@ function navClass(to: string, end?: boolean) {
       {
         NAV_LINKS.map(({ to, end, label }) => (
           <a
+           data-astro-prefetch
             href={to}
             class={navClass(to, end)}
             {...(isNavActive(currentPath, to, end)
@@ -177,6 +178,7 @@ function navClass(to: string, end?: boolean) {
         </nav>
         <div class="flex items-center gap-3 border-t border-white/10 px-4 py-4">
           <a
+            data-astro-prefetch
             href="/contact-us"
             class="focus-ring w-full cursor-pointer rounded-lg bg-mb-accent py-3 text-center text-sm font-semibold text-mb-surface transition-colors duration-200 hover:bg-mb-accent-hover"
           >

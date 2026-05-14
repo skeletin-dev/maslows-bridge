@@ -1,8 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HomePage from "../components/marketing/HomePage.astro";
+import { SITE } from "../site";
 ---
 
 <BaseLayout>
+  <link
+    slot="head-extra"
+    rel="preload"
+    as="image"
+    href={SITE.heroBackgroundSrc}
+    fetchpriority="high"
+  />
   <HomePage />
 </BaseLayout>

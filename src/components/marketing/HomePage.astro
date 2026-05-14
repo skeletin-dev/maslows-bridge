@@ -57,11 +57,16 @@ const pillars = [
           {SITE.tagline}
         </p>
         <div class="mt-10 flex flex-wrap gap-3 sm:gap-4">
-          <a href="/contact-us" class:list={[pillPrimary, "px-7 py-3.5"]}>
+          <a 
+            href="/contact-us" 
+            data-astro-prefetch 
+            class:list={[pillPrimary, "px-7 py-3.5"]}
+          >
             Get involved
             <span aria-hidden="true" class="ml-1 text-lg leading-none">→</span>
           </a>
           <a
+            data-astro-prefetch
             href="/services"
             class="focus-ring inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-white/25 bg-white/8 px-7 py-3.5 text-sm font-semibold text-mb-text-on-dark transition-[border-color,background-color] duration-200 hover:border-mb-accent/45 hover:bg-white/12 sm:text-base"
           >
