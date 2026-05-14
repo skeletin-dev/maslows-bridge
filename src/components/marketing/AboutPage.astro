@@ -124,7 +124,7 @@ const needs = [
       <div class="mt-6 h-px bg-mb-mist" aria-hidden="true"></div>
       <div class="mt-10 grid gap-6 sm:gap-8 lg:grid-cols-3">
         {values.map((v) => (
-          <article class="group relative h-full overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-[transform,box-shadow] motion-safe:duration-[250ms] motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
+          <article class="group relative h-full overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
             <div class="absolute inset-x-0 top-0 h-0.5 bg-mb-accent" aria-hidden="true"></div>
             <div class="flex h-full flex-col p-7 pt-8 sm:p-8 sm:pt-9">
               <p class="font-display font-bold leading-none text-mb-mist" style="font-size: clamp(2.5rem, 7vw, 4rem)" aria-hidden="true">
@@ -179,7 +179,6 @@ const needs = [
   </section>
 
   <section class="relative overflow-hidden border-t border-white/10 bg-mb-surface px-4 py-20 sm:py-28">
-    <div class="pointer-events-none absolute -right-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-mb-accent/8 blur-3xl" aria-hidden="true"></div>
     <div class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-mb-accent/40 to-transparent" aria-hidden="true"></div>
     <div class="relative mx-auto flex max-w-4xl flex-col gap-10 sm:flex-row sm:items-center sm:justify-between">
       <div>

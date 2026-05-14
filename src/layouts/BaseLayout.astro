@@ -31,10 +31,20 @@ const {
     <link rel="preload" as="image" href="/indianapolis.jpg" />
     <title>{title}</title>
     <ClientRouter />
+    <style is:global>
+      /* Snappier route transitions than browser defaults (ClientRouter / View Transitions). */
+      @media (prefers-reduced-motion: no-preference) {
+        ::view-transition-old(root),
+        ::view-transition-new(root) {
+          animation-duration: 200ms;
+          animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+      }
+    </style>
   </head>
   <body class="flex min-h-dvh flex-col bg-mb-cream text-mb-ink">
     <Header />
-    <main class="flex flex-1 flex-col">
+    <main class="flex flex-1 flex-col" data-motion-page>
       <slot />
     </main>
     <Footer />

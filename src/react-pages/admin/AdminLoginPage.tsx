@@ -1,5 +1,5 @@
 import { useState, type SubmitEvent } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../../network/api";
 import { useAuth } from "../../auth/useAuth";
@@ -224,12 +224,12 @@ export function AdminLoginPage() {
           </form>
 
           <p className="mt-6 text-center text-sm text-slate-500">
-            <Link
-              to="/"
+            <a
+              href="/"
               className="font-medium text-blue-600 transition-colors hover:text-blue-800 hover:underline"
             >
               ← Back to public site
-            </Link>
+            </a>
           </p>
           <p className="mt-2 text-center text-xs text-slate-400">
             Accounts are provisioned by the team — no self-service registration.

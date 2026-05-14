@@ -1,20 +1,35 @@
 ---
+export const prerender = false;
+
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDetail from "../../components/marketing/ProjectDetail.astro";
+import NotFoundPage from "../../components/marketing/NotFoundPage.astro";
 import api from "../../network/api";
+import NotFoundError from "../../errors/notFoundError";
 
-export async function getStaticPaths() {
-  const projects = await api.projects.getAll();
-
-  return projects.map((project) => ({
-    params: { slug: project.slug },
-    props: { project },
-  }));
+const slug = Astro.params.slug;
+if (!slug) {
+  return Astro.redirect("/projects");
 }
 
-const { project } = Astro.props;
+let project;
+try {
+  project = await api.projects.show(slug);
+} catch (e) {
+  if (e instanceof NotFoundError) {
+    project = null;
+  } else {
+    throw e;
+  }
+}
+
+if (!project) {
+  Astro.response.status = 404;
+}
 ---
 
-<BaseLayout title={`${project.title} | Maslow's Bridge`}>
-  <ProjectDetail project={project} />
+<BaseLayout
+  title={project ? `${project.title} | Maslow's Bridge` : "Project not found | Maslow's Bridge"}
+>
+  {project ? <ProjectDetail project={project} /> : <NotFoundPage />}
 </BaseLayout>

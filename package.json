@@ -7,9 +7,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "lint": "eslint .",
-    "preview": "astro preview"
+    "preview": "netlify dev"
   },
   "dependencies": {
+    "@astrojs/netlify": "^6.6.5",
     "@astrojs/react": "^4.4.0",
     "@emailjs/browser": "^4.4.1",
     "@rjsf/core": "^6.5.1",
@@ -35,6 +36,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "netlify-cli": "^26.0.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.0"
   }

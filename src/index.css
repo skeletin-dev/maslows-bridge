@@ -10,13 +10,6 @@
   100% { left: 160%;  }
 }
 
-/** Gentle multi-axis float for decorative orbs & particles */
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0px)   translateX(0px);  }
-  33%       { transform: translateY(-11px) translateX(4px);  }
-  66%       { transform: translateY(-5px)  translateX(-3px); }
-}
-
 /** Expanding ring pulse — radiates outward and fades */
 @keyframes pulse-ring {
   0%   { transform: scale(1);   opacity: 0.55; }
@@ -65,17 +58,6 @@
     .btn-shimmer:hover::before {
       animation: shimmer-sweep 0.58s ease-out;
     }
-  }
-
-  /** Floating animation helpers — stagger via different durations + delays */
-  .animate-float {
-    animation: float-slow 5s ease-in-out infinite;
-  }
-  .animate-float-b {
-    animation: float-slow 6.5s ease-in-out infinite 1.4s;
-  }
-  .animate-float-c {
-    animation: float-slow 8s ease-in-out infinite 2.8s;
   }
 
   /** Animated gradient gold text */

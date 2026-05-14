@@ -22,15 +22,6 @@ const pillars = [
     to: "/about",
   },
 ] as const;
-
-const heroDust = [
-  { w: 3, top: "22%", left: "7%", color: "bg-mb-accent/50", dur: 4.5, delay: 0 },
-  { w: 2, top: "48%", left: "4%", color: "bg-mb-hope/60", dur: 5.5, delay: 1 },
-  { w: 4, top: "72%", left: "14%", color: "bg-mb-accent/35", dur: 6, delay: 2 },
-  { w: 2, top: "16%", left: "44%", color: "bg-mb-hope/45", dur: 4, delay: 0.5 },
-  { w: 3, top: "58%", left: "38%", color: "bg-mb-accent/28", dur: 5, delay: 1.5 },
-  { w: 2, top: "35%", left: "50%", color: "bg-mb-hope/35", dur: 6.5, delay: 3 },
-] as const;
 ---
 
 <>
@@ -49,36 +40,6 @@ const heroDust = [
         style="background: linear-gradient(to right, #141d2e 0%, #141d2e 46%, rgba(20,29,46,0.72) 62%, rgba(20,29,46,0.10) 80%, transparent 100%)"
       >
       </div>
-      <div
-        class="home-hero-bloom pointer-events-none absolute bottom-0 left-0 h-96 w-96 -translate-x-1/4 translate-y-1/4 rounded-full bg-mb-accent/8 blur-3xl"
-        aria-hidden="true"
-      >
-      </div>
-      {
-        heroDust.map((p, i) => (
-          <span
-            class:list={[
-              "home-hero-dust pointer-events-none absolute rounded-full",
-              p.color,
-            ]}
-            style={{
-              width: `${p.w * 4}px`,
-              height: `${p.w * 4}px`,
-              top: p.top,
-              left: p.left,
-              "--dust-dur": `${p.dur}s`,
-              "--dust-delay": `${p.delay}s`,
-            }}
-            aria-hidden="true"
-          />
-        ))
-      }
-    </div>
-
-    <div
-      class="home-hero-accent-line pointer-events-none absolute bottom-16 left-[54%] top-24 z-20 hidden w-px bg-gradient-to-b from-transparent via-mb-accent/60 to-transparent lg:block"
-      aria-hidden="true"
-    >
     </div>
 
     <div class="relative z-10 flex min-h-dvh flex-col justify-center px-6 pb-20 pt-32 sm:px-10 lg:w-[52%] lg:px-16 lg:pb-28 lg:pt-28">
@@ -156,7 +117,7 @@ const heroDust = [
       <div class="mt-10 grid gap-6 sm:gap-8 lg:grid-cols-3">
         {
           pillars.map((pillar) => (
-            <article class="group relative h-full overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-[transform,box-shadow] motion-safe:duration-[250ms] motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
+            <article class="group relative h-full overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
               <div class="absolute inset-x-0 top-0 h-0.5 bg-mb-accent" aria-hidden="true" />
               <div class="flex h-full flex-col p-7 pt-8 sm:p-8 sm:pt-9">
                 <p
@@ -373,7 +334,7 @@ const heroDust = [
       </p>
 
       <div class="mt-12 grid gap-6 sm:gap-8 lg:grid-cols-3">
-        <article class="group flex h-full flex-col rounded-2xl border border-mb-mist/70 bg-white p-8 shadow-mb-card transition-[transform,box-shadow,border-color] duration-[250ms] ease-out hover:border-mb-accent/25 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover sm:p-9">
+        <article class="group flex h-full flex-col rounded-2xl border border-mb-mist/70 bg-white p-8 shadow-mb-card transition-[transform,border-color] duration-200 ease-out hover:border-mb-accent/25 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover sm:p-9">
           <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-mb-hope/12 text-mb-hope transition-colors duration-200">
             <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
               <path
@@ -406,7 +367,7 @@ const heroDust = [
           </a>
         </article>
 
-        <article class="group flex h-full flex-col rounded-2xl border border-mb-mist/70 bg-white p-8 shadow-mb-card transition-[transform,box-shadow,border-color] duration-[250ms] ease-out hover:border-mb-accent/25 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover sm:p-9">
+        <article class="group flex h-full flex-col rounded-2xl border border-mb-mist/70 bg-white p-8 shadow-mb-card transition-[transform,border-color] duration-200 ease-out hover:border-mb-accent/25 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover sm:p-9">
           <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-mb-accent/12 text-mb-accent transition-colors duration-200">
             <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
               <path
@@ -439,7 +400,7 @@ const heroDust = [
           </a>
         </article>
 
-        <article class="group flex h-full flex-col rounded-2xl border border-mb-mist/70 bg-white p-8 shadow-mb-card transition-[transform,box-shadow,border-color] duration-[250ms] ease-out hover:border-mb-accent/25 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover sm:p-9">
+        <article class="group flex h-full flex-col rounded-2xl border border-mb-mist/70 bg-white p-8 shadow-mb-card transition-[transform,border-color] duration-200 ease-out hover:border-mb-accent/25 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover sm:p-9">
           <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-mb-surface-elevated/60 text-mb-text-muted transition-colors duration-200">
             <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
               <path
@@ -514,10 +475,6 @@ const heroDust = [
 
   <section class="relative overflow-hidden border-t border-white/10 bg-mb-surface px-4 py-20 sm:py-28">
     <div
-      class="join-cta-bloom pointer-events-none absolute -right-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-mb-accent/8 blur-3xl"
-      aria-hidden="true"
-    />
-    <div
       class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-mb-accent/40 to-transparent"
       aria-hidden="true"
     />
@@ -542,63 +499,3 @@ const heroDust = [
     </div>
   </section>
 </>
-
-<style>
-  @keyframes home-hero-bloom {
-    0%,
-    100% {
-      transform: translate(-25%, 25%) scale(1);
-      opacity: 0.5;
-    }
-    50% {
-      transform: translate(-25%, 25%) scale(1.18);
-      opacity: 0.85;
-    }
-  }
-  @keyframes home-hero-dust {
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 0.35;
-    }
-    50% {
-      transform: translateY(-10px);
-      opacity: 0.9;
-    }
-  }
-  @keyframes home-hero-line {
-    0%,
-    100% {
-      opacity: 0.5;
-    }
-    50% {
-      opacity: 1;
-    }
-  }
-  @keyframes join-cta-bloom {
-    0%,
-    100% {
-      transform: translateY(-50%) scale(1);
-      opacity: 0.5;
-    }
-    50% {
-      transform: translateY(-50%) scale(1.2);
-      opacity: 0.85;
-    }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .home-hero-bloom {
-      animation: home-hero-bloom 5s ease-in-out infinite;
-    }
-    .home-hero-dust {
-      animation: home-hero-dust var(--dust-dur, 5s) ease-in-out infinite;
-      animation-delay: var(--dust-delay, 0s);
-    }
-    .home-hero-accent-line {
-      animation: home-hero-line 3s ease-in-out infinite;
-    }
-    .join-cta-bloom {
-      animation: join-cta-bloom 5s ease-in-out infinite;
-    }
-  }
-</style>

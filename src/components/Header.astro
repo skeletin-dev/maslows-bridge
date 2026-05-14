@@ -18,6 +18,7 @@ function navClass(to: string, end?: boolean) {
 <header
   id="site-header"
   data-home={isHome ? "true" : "false"}
+  data-hero-top={isHome ? "true" : undefined}
   aria-label={SITE.name}
   class:list={[
     positionClass,
@@ -207,4 +208,57 @@ function navClass(to: string, end?: boolean) {
   .site-header:not(.header-theme-hero) .mb-brand-text {
     color: var(--color-mb-text-on-dark, #e8ecf4);
   }
+
+  /* Home: scrolled — match solid sticky header (transparent only at top). */
+  #site-header[data-home="true"][data-hero-top="false"] {
+    border-bottom-color: rgb(199 158 71 / 0.2);
+    background-color: rgb(20 29 46 / 0.98);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  #site-header[data-home="true"][data-hero-top="false"] .mb-brand-text {
+    color: var(--color-mb-text-on-dark, #e8ecf4);
+  }
+  #site-header[data-home="true"][data-hero-top="false"]
+    .nav-desktop-link:not([aria-current="page"]) {
+    color: var(--color-mb-text-muted, #b8c4d9);
+  }
+  #site-header[data-home="true"][data-hero-top="false"]
+    .nav-desktop-link:not([aria-current="page"]):hover {
+    color: var(--color-mb-accent, #c79e47);
+  }
+  #site-header[data-home="true"][data-hero-top="false"] .mb-social-wrap {
+    border-color: rgb(255 255 255 / 0.1);
+  }
+  #site-header[data-home="true"][data-hero-top="false"] .mb-social-wrap a {
+    color: var(--color-mb-text-muted, #b8c4d9);
+  }
+  #site-header[data-home="true"][data-hero-top="false"] .mb-social-wrap a:hover {
+    color: var(--color-mb-accent, #c79e47);
+  }
 </style>
+
+<script is:inline>
+  (function () {
+    const THRESHOLD = 48;
+    let detach = function () {};
+    function bind() {
+      detach();
+      var header = document.getElementById("site-header");
+      if (!header || header.getAttribute("data-home") !== "true") return;
+      function sync() {
+        header.setAttribute(
+          "data-hero-top",
+          window.scrollY < THRESHOLD ? "true" : "false",
+        );
+      }
+      sync();
+      window.addEventListener("scroll", sync, { passive: true });
+      detach = function () {
+        window.removeEventListener("scroll", sync);
+      };
+    }
+    document.addEventListener("astro:page-load", bind);
+    bind();
+  })();
+</script>

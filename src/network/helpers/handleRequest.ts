@@ -22,14 +22,18 @@ export async function handleRequest<T>(
 
     return await handleResponse<T>(response);
   } catch (error) {
-    console.log(error);
-    if (error instanceof TypeError || error instanceof Error) {
-      const message = error.message.includes("timeout")
-        ? "Request timed out. Please check your connection."
-        : "Unable to connect to server. Please check your internet.";
+    // Only real transport failures — API errors from handleResponse are Error subclasses too.
+    if (error instanceof TypeError)
+      throw new NetworkError(
+        "Unable to connect to server. Please check your internet.",
+        error,
+      );
 
-      throw new NetworkError(message, error);
-    }
+    if (error instanceof Error && error.message.includes("timeout"))
+      throw new NetworkError(
+        "Request timed out. Please check your connection.",
+        error,
+      );
 
     throw error;
   }

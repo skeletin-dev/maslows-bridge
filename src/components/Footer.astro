@@ -19,16 +19,6 @@ const year = new Date().getFullYear();
 
 <footer class="relative overflow-hidden bg-mb-surface">
   <div
-    class="footer-orb-a pointer-events-none absolute -right-28 top-0 h-96 w-96 rounded-full bg-mb-accent/6 blur-3xl"
-    aria-hidden
-  >
-  </div>
-  <div
-    class="footer-orb-b pointer-events-none absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-mb-hope/8 blur-3xl"
-    aria-hidden
-  >
-  </div>
-  <div
     class="footer-top-rule h-px w-full origin-left scale-x-0 bg-linear-to-r from-transparent via-mb-accent/50 to-transparent opacity-0"
     aria-hidden
   >
@@ -176,28 +166,6 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  @keyframes footer-orb-a {
-    0%,
-    100% {
-      transform: translateY(0) scale(1);
-      opacity: 0.3;
-    }
-    50% {
-      transform: translateY(-20px) scale(1.1);
-      opacity: 0.6;
-    }
-  }
-  @keyframes footer-orb-b {
-    0%,
-    100% {
-      transform: translateY(0);
-      opacity: 0.25;
-    }
-    50% {
-      transform: translateY(16px);
-      opacity: 0.5;
-    }
-  }
   @keyframes footer-rule-in {
     from {
       transform: scaleX(0);
@@ -209,12 +177,6 @@ const year = new Date().getFullYear();
     }
   }
   @media (prefers-reduced-motion: no-preference) {
-    .footer-orb-a {
-      animation: footer-orb-a 8s ease-in-out infinite;
-    }
-    .footer-orb-b {
-      animation: footer-orb-b 10s ease-in-out infinite 2s;
-    }
     .footer-top-rule {
       animation: footer-rule-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }

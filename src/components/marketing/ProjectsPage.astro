@@ -46,16 +46,13 @@ const { projects } = Astro.props;
                   Active initiatives
                 </h2>
               </div>
-              <p class="text-sm text-mb-ink/60">
-                {projects.length} {projects.length === 1 ? "project" : "projects"}
-              </p>
             </div>
             <div class="mt-6 h-px bg-mb-mist" aria-hidden="true" />
             <div class="mt-10 grid gap-6 sm:grid-cols-2 sm:gap-8">
               {projects.map((project) => {
                 const isOngoing = !project.end_date;
                 return (
-                  <article class="group relative flex h-full flex-col overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-[transform,box-shadow] motion-safe:duration-[250ms] motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
+                  <article class="group relative flex h-full flex-col overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
                     <div class="absolute inset-x-0 top-0 h-0.5 bg-mb-accent" aria-hidden="true" />
                     <div class="flex flex-1 flex-col p-7 pt-8 sm:p-8 sm:pt-9">
                       <div class="mb-4 flex items-center gap-2">
@@ -132,10 +129,6 @@ const { projects } = Astro.props;
   </section>
 
   <section class="relative overflow-hidden border-t border-white/10 bg-mb-surface px-4 py-20 sm:py-28">
-    <div
-      class="pointer-events-none absolute -right-24 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-mb-accent/8 blur-3xl"
-      aria-hidden="true"
-    />
     <div
       class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-mb-accent/40 to-transparent"
       aria-hidden="true"
