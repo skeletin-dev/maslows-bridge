@@ -1,0 +1,163 @@
+---
+import PageHero from "../PageHero.astro";
+import { pillPrimary, pillSecondary, sectionLightGlow } from "../pageLayout";
+import { formatDateLong, formatUseOfFundLabel } from "../../lib/dateFormat";
+
+export type Props = { project: Project };
+
+const { project } = Astro.props;
+const isOngoing = !project.end_date;
+---
+
+<>
+  <PageHero
+    title={project.title}
+    subtitle={`${project.city}, ${project.state}`}
+    eyebrow={isOngoing ? "Ongoing project" : "Completed project"}
+    variant="atmosphere"
+  />
+
+  <section class={sectionLightGlow}>
+    <div class="mx-auto max-w-4xl space-y-10">
+      <a
+        href="/projects"
+        class="focus-ring inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-mb-ink/60 transition-colors duration-200 hover:text-mb-accent-solid"
+      >
+        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        All projects
+      </a>
+
+      <div>
+        <div class="mb-5 h-0.5 w-12 bg-mb-accent" aria-hidden="true"></div>
+        <p class="text-lg leading-relaxed text-mb-ink/85 sm:text-xl">{project.description}</p>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card ring-1 ring-black/[0.03]">
+          <div class="border-b border-mb-mist/60 bg-mb-cream/50 px-6 py-4">
+            <div class="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"
+                />
+              </svg>
+              Location
+            </div>
+          </div>
+          <div class="px-6 py-5">
+            <p class="font-medium leading-relaxed text-mb-ink">
+              {project.street}
+              {project.line || project.line1 ? (
+                <>
+                  <br />
+                  {project.line ?? project.line1}
+                </>
+              ) : null}
+              <br />
+              {project.city}, {project.state} {project.zip_code}
+            </p>
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card ring-1 ring-black/3">
+          <div class="border-b border-mb-mist/60 bg-mb-cream/50 px-6 py-4">
+            <div class="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+                />
+              </svg>
+              Timeline
+            </div>
+          </div>
+          <div class="px-6 py-5">
+            <div class="flex items-center gap-2">
+              <span
+                class:list={[
+                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold",
+                  isOngoing ? "bg-mb-hope/10 text-mb-hope" : "bg-mb-mist/80 text-mb-ink/60",
+                ]}
+              >
+                <span
+                  class:list={["h-1.5 w-1.5 rounded-full", isOngoing ? "bg-mb-hope" : "bg-mb-ink/40"]}
+                  aria-hidden="true"
+                />
+                {isOngoing ? "Ongoing" : "Completed"}
+              </span>
+            </div>
+            <p class="mt-3 font-medium text-mb-ink">
+              {formatDateLong(project.start_date)}
+              {project.end_date ? (
+                <>
+                  <span class="text-mb-ink/45"> — </span>
+                  {formatDateLong(project.end_date)}
+                </>
+              ) : (
+                <span class="text-mb-ink/55"> — Present</span>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {
+        project.use_of_funds?.length ? (
+          <div class="overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card ring-1 ring-black/3">
+            <div class="border-b border-mb-mist/60 bg-mb-cream/50 px-6 py-4">
+              <p class="text-xs font-semibold uppercase tracking-wider text-mb-accent-solid">
+                Use of funds
+              </p>
+            </div>
+            <div class="px-6 py-5">
+              <ul class="flex flex-wrap gap-2" role="list">
+                {project.use_of_funds.map((item) => (
+                  <li class="rounded-full border border-mb-mist bg-mb-cream px-4 py-1.5 text-sm font-medium text-mb-ink/85">
+                    {formatUseOfFundLabel(item)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ) : null
+      }
+
+      <div class="flex flex-wrap gap-3 pt-2">
+        <a href="/projects" class={pillSecondary}>
+          ← All projects
+        </a>
+        <a href="/contact-us" class={pillPrimary}>
+          Contact us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden border-t border-white/10 bg-mb-surface px-4 py-20 sm:py-28">
+    <div
+      class="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-mb-accent/40 to-transparent"
+      aria-hidden="true"
+    />
+    <div class="relative mx-auto flex max-w-4xl flex-col gap-10 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <div class="mb-5 h-0.5 w-12 bg-mb-accent" aria-hidden="true"></div>
+        <h2 class="font-display text-3xl font-bold tracking-tight text-mb-text-on-dark sm:text-4xl">
+          Support this initiative
+        </h2>
+        <p class="mt-4 max-w-lg text-base leading-relaxed text-mb-text-on-dark/75">
+          Reach out to discuss partnership, volunteering, or referrals.
+        </p>
+      </div>
+      <a href="/contact-us" class:list={[pillPrimary, "shrink-0 py-4 text-base"]}>
+        Get in touch
+        <span aria-hidden="true" class="ml-1">→</span>
+      </a>
+    </div>
+  </section>
+</>

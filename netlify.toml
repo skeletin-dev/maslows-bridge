@@ -1,3 +1,10 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Admin is a client-side React Router app under /admin; serve the same shell for deep links
+# (e.g. /admin/login) that are not matched by a generated HTML file.
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/index.html"
+  status = 200

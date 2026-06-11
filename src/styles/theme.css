@@ -15,8 +15,16 @@
   --color-mb-text-on-dark: #f0ebe0;
   --color-mb-text-muted: #b8c4d9;
 
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Merriweather", ui-serif, Georgia, serif;
+  /* Narrative Illustrated direction: Newsreader headings, Inter body (matches Pencil system) */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Newsreader", ui-serif, Georgia, serif;
 
   --radius-pill: 9999px;
+  /* Framer-style cards: one knob for radii site-wide */
+  --radius-card: 1.5rem;
+
+  /* Vertical rhythm (ui-ux-pro-max: generous section gaps) */
+  --mb-section-y: 4.5rem;
+  --mb-section-y-sm: 6rem;
+  --line-height-prose: 1.65;
 }
