@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AdminPageHeader } from "../../components/admin/AdminPageHeader";
 import api from "../../network/api";
 import NotFoundError from "../../errors/notFoundError";
+import { formatProjectDate } from "../../lib/dateFormat";
 
 // ── Field component ───────────────────────────────────────────────────────────
 
@@ -158,6 +159,37 @@ function AdminProjectShowBody({ slug }: { slug: string }) {
       />
 
       <div className="px-6 py-6">
+        {/* Photos */}
+        <section aria-labelledby="photos-heading" className="mb-4 rounded-lg border border-slate-200 bg-white p-5">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 id="photos-heading" className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
+              Photos ({project.images?.length ?? 0})
+            </h2>
+            <Link
+              to={`/admin/projects/${project.slug}/edit#photos`}
+              className="text-xs font-medium text-blue-600 transition-colors hover:text-blue-800"
+            >
+              {project.images?.length ? "Manage photos" : "Add photos"} →
+            </Link>
+          </div>
+          {project.images?.length ? (
+            <ul className="flex gap-3 overflow-x-auto pb-1">
+              {project.images.map((image, i) => (
+                <li key={image.id} className="relative w-36 shrink-0 overflow-hidden rounded-md border border-slate-200 bg-slate-100">
+                  <img src={image.url} alt={`Photo ${i + 1}`} loading="lazy" className="aspect-[4/3] w-full object-cover" />
+                  {i === 0 ? (
+                    <span className="absolute left-1.5 top-1.5 rounded bg-slate-900/80 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-white">
+                      Cover
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-sm italic text-slate-400">No photos yet</p>
+          )}
+        </section>
+
         {/* Main data grid */}
         <dl className="overflow-hidden rounded-lg border border-slate-200 sm:grid sm:grid-cols-2 sm:divide-x sm:divide-slate-100">
           <div className="divide-y divide-slate-100">
@@ -171,12 +203,17 @@ function AdminProjectShowBody({ slug }: { slug: string }) {
         <dl className="mt-4 overflow-hidden rounded-lg border border-slate-200 sm:grid sm:grid-cols-2">
           <div className="divide-y divide-slate-100 bg-white">
             <FieldRow label="Start date">
-              <span className="font-mono text-sm">{project.start_date}</span>
+              {formatProjectDate(project.start_date, project.start_date_precision)}
+              {project.start_date_precision === "month" ? (
+                <span className="ml-2 rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+                  Month only
+                </span>
+              ) : null}
             </FieldRow>
             <FieldRow label="End date">
               {project.end_date
-                ? <span className="font-mono text-sm">{project.end_date}</span>
-                : <span className="italic text-slate-400">Ongoing</span>}
+                ? formatProjectDate(project.end_date)
+                : <span className="italic text-slate-400">None (ongoing)</span>}
             </FieldRow>
           </div>
           <div className="divide-y divide-slate-100 bg-white">

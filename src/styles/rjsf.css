@@ -122,7 +122,12 @@
   background-color: #fef2f2;
 }
 
-.rjsf-admin button:hover {
+/* Scoped to rjsf's own buttons so custom fields/widgets keep their Tailwind hover colors. */
+.rjsf-admin .btn:hover,
+.rjsf-admin button.array-item-add:hover,
+.rjsf-admin button.array-item-move-up:hover,
+.rjsf-admin button.array-item-move-down:hover,
+.rjsf-admin button.array-item-copy:hover {
   background-color: #f9fafb;
 }
 

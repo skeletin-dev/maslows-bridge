@@ -139,7 +139,7 @@ export function AdminLayout() {
       </header>
 
       {/* ── Body ────────────────────────────────────────────── */}
-      <div className="flex flex-1 pt-14">
+      <div className="flex min-w-0 flex-1 pt-14">
 
         {/* Sidebar — desktop */}
         <aside className="hidden w-56 shrink-0 flex-col bg-slate-900 sm:flex lg:w-60">

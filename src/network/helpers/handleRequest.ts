@@ -4,20 +4,22 @@ import { NetworkError } from "../../errors/networkError";
 
 const REQUEST_TIMEOUT = 10000;
 
-function createTimeoutPromise(): Promise<never> {
+function createTimeoutPromise(ms: number): Promise<never> {
   return new Promise((_, reject) =>
-    setTimeout(() => reject(new Error("Request timeout")), REQUEST_TIMEOUT),
+    setTimeout(() => reject(new Error("Request timeout")), ms),
   );
 }
 
 export async function handleRequest<T>(
   path: string,
   options: RequestInit = {},
+  /** Override for slow requests such as photo uploads. */
+  timeoutMs: number = REQUEST_TIMEOUT,
 ): Promise<T> {
   try {
     const response = await Promise.race([
       fetch(API + path, options),
-      createTimeoutPromise(),
+      createTimeoutPromise(timeoutMs),
     ]);
 
     return await handleResponse<T>(response);
