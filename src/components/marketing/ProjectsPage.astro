@@ -1,7 +1,7 @@
 ---
 import PageHero from "../PageHero.astro";
 import { pillPrimary, sectionLightGlow } from "../pageLayout";
-import { formatDateShort } from "../../lib/dateFormat";
+import { formatProjectTimeline } from "../../lib/dateFormat";
 
 export type Props = { projects: Project[] };
 
@@ -51,10 +51,38 @@ const { projects } = Astro.props;
             <div class="mt-10 grid gap-6 sm:grid-cols-2 sm:gap-8">
               {projects.map((project) => {
                 const isOngoing = !project.end_date;
+                const cover = project.images?.[0];
+                const photoCount = project.images?.length ?? 0;
                 return (
                   <article class="group relative flex h-full flex-col overflow-hidden rounded-xl border border-mb-mist/70 bg-white shadow-mb-card motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-mb-card-hover">
-                    <div class="absolute inset-x-0 top-0 h-0.5 bg-mb-accent" aria-hidden="true" />
-                    <div class="flex flex-1 flex-col p-7 pt-8 sm:p-8 sm:pt-9">
+                    <div class="absolute inset-x-0 top-0 z-10 h-0.5 bg-mb-accent" aria-hidden="true" />
+                    {cover ? (
+                      <a
+                        href={`/projects/${project.slug}`}
+                        tabindex="-1"
+                        aria-hidden="true"
+                        class="relative block aspect-[16/9] overflow-hidden bg-mb-mist"
+                      >
+                        <img
+                          src={cover.url}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          class="h-full w-full object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-out motion-safe:group-hover:scale-[1.03]"
+                        />
+                        {photoCount > 1 ? (
+                          <span class="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-mb-surface/75 px-2.5 py-1 text-xs font-semibold text-mb-text-on-dark backdrop-blur">
+                            <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                              <rect x="3" y="3" width="18" height="18" rx="2" />
+                              <circle cx="8.5" cy="8.5" r="1.5" />
+                              <path d="m21 15-5-5L5 21" />
+                            </svg>
+                            {photoCount} photos
+                          </span>
+                        ) : null}
+                      </a>
+                    ) : null}
+                    <div class:list={["flex flex-1 flex-col p-7 sm:p-8", cover ? "pt-6 sm:pt-7" : "pt-8 sm:pt-9"]}>
                       <div class="mb-4 flex items-center gap-2">
                         <span
                           class:list={[
@@ -88,12 +116,7 @@ const { projects } = Astro.props;
                           <p class="font-medium text-mb-ink/80">
                             {project.city}, {project.state}
                           </p>
-                          <p class="mt-0.5 tabular-nums">
-                            {formatDateShort(project.start_date)}
-                            {project.end_date
-                              ? ` – ${formatDateShort(project.end_date)}`
-                              : " – Present"}
-                          </p>
+                          <p class="mt-0.5 tabular-nums">{formatProjectTimeline(project, "short")}</p>
                         </div>
                         <a
                           href={`/projects/${project.slug}`}

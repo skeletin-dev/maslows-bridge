@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { AdminPageHeader } from "../../components/admin/AdminPageHeader";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../../network/api";
+import { formatProjectTimeline } from "../../lib/dateFormat";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -150,7 +151,7 @@ export function AdminProjectsListPage() {
         </div>
 
         {/* Table */}
-        <div className="overflow-hidden rounded-lg border border-slate-200">
+        <div className="overflow-x-auto rounded-lg border border-slate-200">
           <table className="w-full min-w-[640px] border-collapse text-left text-sm">
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50">
@@ -187,16 +188,22 @@ export function AdminProjectsListPage() {
                 data!.map((p) => (
                   <tr key={p.id} className="transition-colors hover:bg-slate-50/70">
                     <td className="px-5 py-3.5">
-                      <Link
-                        to={`/admin/projects/${p.slug}`}
-                        className="font-medium text-slate-900 transition-colors hover:text-blue-600"
-                      >
-                        {p.title}
-                      </Link>
+                      <div className="flex items-center gap-3">
+                        {p.images?.[0] ? (
+                          <img src={p.images[0].url} alt="" loading="lazy" className="h-9 w-12 shrink-0 rounded object-cover ring-1 ring-slate-200" />
+                        ) : (
+                          <span className="h-9 w-12 shrink-0 rounded bg-slate-100 ring-1 ring-slate-200" aria-hidden />
+                        )}
+                        <Link
+                          to={`/admin/projects/${p.slug}`}
+                          className="font-medium text-slate-900 transition-colors hover:text-blue-600"
+                        >
+                          {p.title}
+                        </Link>
+                      </div>
                     </td>
-                    <td className="px-5 py-3.5 font-mono text-xs text-slate-500">
-                      {p.start_date}
-                      {p.end_date ? <> &rarr; {p.end_date}</> : null}
+                    <td className="px-5 py-3.5 text-xs text-slate-500">
+                      {formatProjectTimeline(p, "short")}
                     </td>
                     <td className="px-5 py-3.5">
                       <StatusBadge endDate={p.end_date} />

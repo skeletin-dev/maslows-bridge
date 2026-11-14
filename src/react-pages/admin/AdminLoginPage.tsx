@@ -1,8 +1,23 @@
 import { useState, type SubmitEvent } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation, type Location } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../../network/api";
 import { useAuth } from "../../auth/useAuth";
+import UnauthorizedError from "../../errors/unauthorizedError";
+
+const SESSION_NOT_KEPT =
+  "Your password was accepted, but this browser didn't keep you signed in. Make sure cookies are allowed for this site (private browsing can block them), then try again.";
+
+/** Signs in, then confirms the browser kept the session before entering the console. */
+async function signIn(credentials: UserCredentials) {
+  await api.auth.login(credentials);
+  try {
+    return await api.auth.loggedIn();
+  } catch (error) {
+    if (error instanceof UnauthorizedError) throw new Error(SESSION_NOT_KEPT);
+    throw error;
+  }
+}
 
 function IconShield() {
   return (
@@ -17,6 +32,25 @@ function IconShield() {
       aria-hidden
     >
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    </svg>
+  );
+}
+
+function IconInfo() {
+  return (
+    <svg
+      className="h-4 w-4 shrink-0 text-amber-600"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="12" cy="12" r="10" />
+      <line x1="12" y1="16" x2="12" y2="12" />
+      <line x1="12" y1="8" x2="12.01" y2="8" />
     </svg>
   );
 }
@@ -41,15 +75,22 @@ function IconAlertCircle() {
 }
 
 export function AdminLoginPage() {
-  const { isLoading, authUser } = useAuth();
+  const { isLoading, authUser, notice, clearNotice } = useAuth();
+  const location = useLocation();
+  // RequireAuth sends the page the user was on; go back there after signing in.
+  const from = (location.state as { from?: Location } | null)?.from;
+  const returnTo = from && from.pathname !== "/admin/login" ? from : "/admin";
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const queryClient = useQueryClient();
 
   const { mutate, isPending, error } = useMutation({
-    mutationFn: api.auth.login,
-    onSuccess: (authUser) => queryClient.setQueryData(["authUser"], authUser),
+    mutationFn: signIn,
+    onSuccess: (authUser) => {
+      clearNotice();
+      queryClient.setQueryData(["authUser"], authUser);
+    },
     onError: () => queryClient.setQueryData(["authUser"], null),
   });
 
@@ -66,7 +107,7 @@ export function AdminLoginPage() {
     );
   }
 
-  if (authUser) return <Navigate to={"/admin"} replace />;
+  if (authUser) return <Navigate to={returnTo} replace />;
 
   async function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
@@ -147,6 +188,14 @@ export function AdminLoginPage() {
               >
                 <IconAlertCircle />
                 <span>{error.message}</span>
+              </div>
+            ) : notice ? (
+              <div
+                className="flex items-start gap-2.5 rounded-md border border-amber-200 bg-amber-50 px-3.5 py-3 text-sm text-amber-900"
+                role="status"
+              >
+                <IconInfo />
+                <span>{notice}</span>
               </div>
             ) : null}
 

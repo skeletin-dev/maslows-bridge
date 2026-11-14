@@ -1,7 +1,10 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AdminPageHeader } from "../../components/admin/AdminPageHeader";
 import { ProjectForm } from "../../components/admin/ProjectForm";
+import { ProjectImagesManager } from "../../components/admin/ProjectImagesManager";
+import type { EditPageState } from "./AdminProjectNewPage";
 import api from "../../network/api";
 import NotFoundError from "../../errors/notFoundError";
 import ValidationError from "../../errors/validationError";
@@ -9,6 +12,8 @@ import ValidationError from "../../errors/validationError";
 function AdminProjectEditBody({ slug }: { slug: string }) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const location = useLocation();
+  const photoError = (location.state as EditPageState | null)?.photoError ?? null;
 
   const {
     data: project,
@@ -34,6 +39,14 @@ function AdminProjectEditBody({ slug }: { slug: string }) {
       navigate(`/admin/projects/${updated.slug}`, { replace: true });
     },
   });
+
+  // "Manage photos" links to #photos; jump there once the project has loaded.
+  const hasProject = Boolean(project);
+  useEffect(() => {
+    if (hasProject && (location.hash === "#photos" || photoError)) {
+      document.getElementById("photos")?.scrollIntoView({ block: "start" });
+    }
+  }, [hasProject, location.hash, photoError]);
 
   function handleUpdate(payload: NewProject) {
     if (!project) return;
@@ -118,8 +131,28 @@ function AdminProjectEditBody({ slug }: { slug: string }) {
           { label: "Edit" },
         ]}
       />
-      <div className="px-6 py-6">
-        <ProjectForm
+      <div className="space-y-8 px-6 py-6">
+        <section
+          id="photos"
+          aria-labelledby="photos-heading"
+          className="scroll-mt-6 rounded-lg border border-slate-200 bg-white p-5"
+        >
+          <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 id="photos-heading" className="text-base font-semibold text-slate-900">
+              Photos
+            </h2>
+            <p className="text-xs text-slate-500">
+              Saved right away &middot; the first photo is the cover
+            </p>
+          </div>
+          <ProjectImagesManager project={project} initialError={photoError} />
+        </section>
+
+        <section aria-labelledby="details-heading">
+          <h2 id="details-heading" className="mb-4 text-base font-semibold text-slate-900">
+            Details
+          </h2>
+          <ProjectForm
           key={String(project.id)}
           project={project}
           submitLabel="Save changes"
@@ -128,6 +161,7 @@ function AdminProjectEditBody({ slug }: { slug: string }) {
           fieldErrors={validationError?.fieldErrors}
           onSubmit={handleUpdate}
         />
+        </section>
       </div>
     </>
   );
