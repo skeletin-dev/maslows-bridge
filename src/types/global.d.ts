@@ -52,6 +52,9 @@ declare global {
   type AuthContextData = {
     authUser: AuthUser | undefined;
     isLoading: boolean;
+    /** Why the user was sent to the login page (e.g. their session ended), if any. */
+    notice: string | null;
+    clearNotice: () => void;
   };
 
   type ApiErrorResponseData = {

@@ -2,7 +2,7 @@ import { handleRequest } from "../helpers/handleRequest";
 
 export default {
   async loggedIn() {
-    return handleRequest<AuthUser>("/logged_in", { credentials: "include" });
+    return handleRequest<AuthUser>("/logged_in");
   },
 
   async login(credentials: UserCredentials) {
@@ -12,14 +12,12 @@ export default {
         "Content-type": "application/json",
       },
       body: JSON.stringify({ user: credentials }),
-      credentials: "include",
     });
   },
 
   async logout() {
     return handleRequest("/logout", {
       method: "DELETE",
-      credentials: "include",
     });
   },
 };

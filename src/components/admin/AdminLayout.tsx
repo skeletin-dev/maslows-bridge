@@ -87,7 +87,8 @@ export function AdminLayout() {
 
   const { mutate } = useMutation({
     mutationFn: api.auth.logout,
-    onSuccess: () => {
+    // Sign out locally even if the request fails (e.g. the session had already ended).
+    onSettled: () => {
       navigate("/admin/login", { replace: true });
       queryClient.setQueryData(["authUser"], null);
       queryClient.clear();

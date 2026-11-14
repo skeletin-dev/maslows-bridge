@@ -9,6 +9,13 @@ export const ACCEPTED_IMAGE_TYPES = [
 export const MAX_IMAGE_BYTES = 15 * 1024 * 1024;
 export const MAX_PROJECT_IMAGES = 30;
 
+/**
+ * Largest photo we send after resizing. Uploads pass through the site's /api proxy, a Netlify
+ * Function that rejects bodies over ~4.5 MB. Resized photos are usually well under 2 MB, so in
+ * practice this only stops very large GIFs.
+ */
+export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+
 /** iPhone photos; most browsers can decode these, so we convert them to JPEG. */
 const CONVERTIBLE_TYPES = ["image/heic", "image/heif"];
 export const PICKER_ACCEPT = [...ACCEPTED_IMAGE_TYPES, ...CONVERTIBLE_TYPES, ".heic", ".heif"].join(",");
@@ -67,13 +74,14 @@ export async function prepareImageForUpload(file: File): Promise<File> {
   }
 }
 
-/** Returns an error message, or null if the file can be uploaded. */
+/** Returns an error message, or null if the (already prepared) file can be uploaded. */
 export function validateImageFile(file: File): string | null {
   if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) {
     return `${file.name} isn't a supported image. Use JPEG, PNG, WebP, GIF, or AVIF.`;
   }
-  if (file.size > MAX_IMAGE_BYTES) {
-    return `${file.name} is larger than ${MAX_IMAGE_BYTES / 1024 / 1024} MB.`;
+  const limit = Math.min(MAX_IMAGE_BYTES, MAX_UPLOAD_BYTES);
+  if (file.size > limit) {
+    return `${file.name} is larger than ${limit / 1024 / 1024} MB, even after resizing.`;
   }
   return null;
 }

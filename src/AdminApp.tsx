@@ -8,8 +8,16 @@ import { AdminProjectEditPage } from "./react-pages/admin/AdminProjectEditPage";
 import { AdminProjectNewPage } from "./react-pages/admin/AdminProjectNewPage";
 import { AdminProjectShowPage } from "./react-pages/admin/AdminProjectShowPage";
 import { AdminProjectsListPage } from "./react-pages/admin/AdminProjectsListPage";
+import UnauthorizedError from "./errors/unauthorizedError";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Retrying a 401 can't help; let AuthProvider send the user to sign in straight away.
+      retry: (failureCount, error) => !(error instanceof UnauthorizedError) && failureCount < 3,
+    },
+  },
+});
 
 export default function AdminApp() {
   return (
